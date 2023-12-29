@@ -116,3 +116,7 @@ body {
 .mint__gradient_background {
   background-image: linear-gradient(180deg, #ff6bff, #58ffff);
 }
+
+.mint__wellet_custom {
+  color: #FFAB24;
+}

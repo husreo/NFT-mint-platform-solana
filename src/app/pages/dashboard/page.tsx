@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import {Accordion, AccordionItem} from "@nextui-org/react";
 import { Carousel } from '@trendyol-js/react-carousel';
 
+
 export default function Home() {
   const [isOpen, setOpen] = useState(false);
   // const router = useRouter();
@@ -19,23 +20,16 @@ export default function Home() {
     indicator: "text-borderYellow",
     content: "text-small px-2",
   };
-  const defaultContent = "Hello world 1994";
-
-  const toMint = (url) =>{
-    router.push(
-      { pathname: "./mint", query: { url: url } }, '/mint'
-    );
-  }
 
   return (
     <div className='w-full bg-bgColor font-ShPinscher'>
       {/* --------------------------------- Header --------------------------------- */}
       <div className='w-full flex flex-col justify-center items-center relative'>
         <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
-          <ScholashipBtn content = "APPLY FOR A SCHOLARSHIP" url = "./contact" />
+          <ScholashipBtn content = "APPLY FOR A SCHOLARSHIP" url = "/pages/dashboard/contact" />
           <div className='hidden md:flex justify-between gap-6 text-white text-content'>
-            <Link href = "./kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
-            <Link href = "#" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
+            <Link href = "dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
+            <Link href = "dashboard/shop" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
             <Link href = "https://t.co/I52MPobQbV" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
             <Link href = "https://discord.gg/hrQX37Cs" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Discord</Link>
           </div>
@@ -129,9 +123,9 @@ export default function Home() {
         </div>} className='h-[800px]'>
           {
             assets.map((val, index) => {
-              return <div key = {val + index} className='relative'>
+              return <div key = {val.url + index} className='relative'>
                 <img src={val.url} alt="" className='w-[700px] rounded-[15px] border-8 border-borderYellow' />
-                <Link href={`/pages/mint/${index}`}><button className='absolute bottom-[-25px] left-[calc(50%-8.3rem)] text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-[38px]'>{val.title}</button></Link>
+                <Link href={`/pages/dashboard/mint/${index}`}><button className='absolute bottom-[-25px] left-[calc(50%-8.3rem)] text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-[38px]'>{val.title}</button></Link>
               </div>
               
             })
