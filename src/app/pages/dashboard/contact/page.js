@@ -49,11 +49,11 @@ export default function Home() {
             <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f06f35054141_pyM-3fPYw6JI5FRONxrYXHaIJHUFrZQ0Xg2ciLVm2q4-p-800.png' alt='no image' className='w-1/2 mt-3 sm:mt-0 sm:w-1/5' />
             <div className='w-full sm:w-1/2 flex flex-col gap-1'>
               <p className='text-borderYellow text-title shadow'>Discord ID</p>
-              <input name='discord_id' className='w-full p-2 h-[40px]' />
+              <input name='discord_id' className='w-full p-2 h-[40px]' placeholder='cryptobro#69428' />
               <p className='text-borderYellow text-title shadow'>Wallet Address</p>
-              <input name='wallet_address' className='w-full p-2 h-[40px]' />
-              <p className='text-borderYellow text-title shadow'>Wallet Address</p>
-              <textarea name='content' className='w-full p-2 h-[200px]' />
+              <input name='wallet_address' className='w-full p-2 h-[40px]' placeholder='solana wallet address' />
+              <p className='text-borderYellow text-title shadow'>What can you bring to the SOLKONGZ community?</p>
+              <textarea name='content' className='w-full p-2 h-[200px]' placeholder='skill/benefit etc' />
               <div className='text-center text-borderYellow text-[15px] py-2'>*YOU MUST JOIN OUR <Link href="https://t.co/I52MPobQbV" className='text-white underline' >DISCORD</Link> ONCE COMPLETING THIS FORM FOR YOUR SUBBMISSION TO BE ELIGIBLE*</div>
               <button className='text-white w-[70px] px-3 py-2 bg-sky-500'>Apply</button>
             </div>

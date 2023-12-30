@@ -13,7 +13,7 @@ import { Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
 import { Environment, OrbitControls, useGLTF } from "@react-three/drei"
 
-export const Model = () => {
+const Model = () => {
     // location of the 3D model
     const gltf = useGLTF("/img/3Dhoodiev3.glb");
     console.log("glft -> ", gltf);
