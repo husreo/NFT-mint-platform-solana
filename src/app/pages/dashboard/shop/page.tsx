@@ -11,7 +11,7 @@ import {
 } from "@solana/wallet-adapter-react-ui";
 import { useRef } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber"
-import { OrbitControls, useGLTF } from "@react-three/drei"
+import { OrbitControls, useGLTF, Environment } from "@react-three/drei"
 import { Mesh } from "three";
 // const Model = () => {
 //     // location of the 3D model
@@ -78,12 +78,13 @@ export default function Home() {
             <div className='w-full flex flex-col justify-center items-center gap-20 pb-14 mt-12'>
                 <p className='text-title text-borderYellow'> SOLKONGZ OG HOODIE</p>
                 <p className='text-title text-white'> 1 $SOL EACH</p>
-                <div className='flex justify-center items-center h-screen'>
+                <div className='flex justify-center items-center h-screen w-full'>
                     <Canvas className='h-full w-full'>
                         <OrbitControls />
                         <ambientLight />
                         <pointLight position={[10, 10, 10]} />
                         <MeshComponent />
+                        <Environment preset="city" />
                     </Canvas>
                 </div>
             </div>
