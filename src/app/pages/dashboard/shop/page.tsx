@@ -9,23 +9,36 @@ import {
 	WalletConnectButton,
 	WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
-import { Suspense } from "react"
-import { Canvas } from "@react-three/fiber"
-import { Environment, OrbitControls, useGLTF } from "@react-three/drei"
-
-const Model = () => {
-    // location of the 3D model
-    const gltf = useGLTF("/img/3Dhoodiev3.glb");
-    console.log("glft -> ", gltf);
+import { useRef } from "react";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber"
+import { OrbitControls, useGLTF } from "@react-three/drei"
+import { Mesh } from "three";
+// const Model = () => {
+//     // location of the 3D model
+//     const gltf = useGLTF("/img/3Dhoodiev3.glb");
+//     console.log("glft -> ", gltf);
     
+//     return (
+//       <>
+//         {/* Use scale to control the size of the 3D model */}
+//         <primitive object={gltf.scene} />
+//       </>
+//     );
+// };
+function MeshComponent() {
+    const mesh = useRef<Mesh>(null!);
+    const gltf = useGLTF("/img/3Dhoodiev3.glb");
+  
+    useFrame(() => {
+      mesh.current.rotation.y += 0.01;
+    });
+  
     return (
-      <>
-        {/* Use scale to control the size of the 3D model */}
+      <mesh ref={mesh}>
         <primitive object={gltf.scene} />
-      </>
+      </mesh>
     );
-};
-
+  }
 export default function Home() {
     const [isOpen, setOpen] = useState(false);
 
@@ -65,13 +78,14 @@ export default function Home() {
             <div className='w-full flex flex-col justify-center items-center gap-20 pb-14 mt-12'>
                 <p className='text-title text-borderYellow'> SOLKONGZ OG HOODIE</p>
                 <p className='text-title text-white'> 1 $SOL EACH</p>
-                <Canvas shadows camera={{ position: [0, 0, -70], fov: 3 }} >
-                    <Suspense fallback={null}>
-                        <Model />
-                        {/* To add environment effect to the model */}
-                        <Environment preset="city" />
-                    </Suspense>
-                </Canvas>
+                <div className='flex justify-center items-center h-screen'>
+                    <Canvas className='h-full w-full'>
+                        <OrbitControls />
+                        <ambientLight />
+                        <pointLight position={[10, 10, 10]} />
+                        <MeshComponent />
+                    </Canvas>
+                </div>
             </div>
             {/* --------------------------------- Body End-------------------------------- */}   
         </div>
