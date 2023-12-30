@@ -40,7 +40,7 @@ export default function Home() {
             <FaAlignJustify className="w-[16px] h-[16px]" />
           </div>
           {isOpen && (
-            <div className='absolute w-full bg-bgColor top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
+            <div className='absolute w-full bg-bgColor top-[4.6rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
               <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
               <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
               <Link href="https://t.co/I52MPobQbV" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
@@ -116,24 +116,24 @@ export default function Home() {
         </div>
         <p className='text-[38px] text-borderYellow shadow'>1/1 Legendary Kongz</p>
         
-        <Carousel show={2} slide={2} transition={0.5} swiping={true} useArrowKeys={true} leftArrow={<div className=' items-center justify-center cursor-pointer h-full w-[200px] lg:flex md:flex hidden rotate-180'>
+        <Carousel show={2} slide={1} transition={0.5} swiping={true} useArrowKeys={true} leftArrow={<div className=' items-center justify-center cursor-pointer h-full w-[200px] lg:flex md:flex hidden rotate-180'>
           <FaAngleRight className='text-white text-title' />
         </div>} rightArrow={<div className=' items-center justify-center cursor-pointer h-full w-[200px] lg:flex md:flex hidden rotate-180'>
           <FaAngleLeft className='text-white text-title' />
-        </div>} className='h-[800px]'>
+        </div>} className='h-[600px]'>
           {
             assets.map((val, index) => {
               return <div key = {val.url + index} className='relative'>
-                <img src={val.url} alt="" className='w-[700px] rounded-[15px] border-8 border-borderYellow' />
-                <Link href={`/pages/dashboard/mint/${index}`}><button className='absolute bottom-[-25px] left-[calc(50%-8.3rem)] text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-[38px]'>{val.title}</button></Link>
+                <img src={val.url} alt="" className='w-[300px] sm:w-[500px] rounded-[15px] border-8 border-borderYellow' />
+                <Link href={`/pages/dashboard/mint/${index}`}><button className='absolute bottom-[-25px] left-[3.5rem] sm:left-[calc(50%-8.3rem)] text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-[38px]'>{val.title}</button></Link>
               </div>
               
             })
           }
         </Carousel>
-        <div className='w-full relative'>
+        <div className='w-full relative overflow-hidden'>
           <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f04f39054152_unknown-p-2000.png' width={100} height={70} className='w-full' alt='noimage'></img>
-          <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f0848e054151_unkno5668wn-p-500.png' className='bottom-9 right-[-6rem] absolute border-[6px] border-white rounded-xl w-[20rem] box_shadow' />
+          <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f0848e054151_unkno5668wn-p-500.png' className='bottom-9 right-0 md:right-[-5rem] absolute border-[6px] border-white rounded-xl w-1/2 md:w-1/3 lg:w-1/4 box_shadow' />
         </div>
         <p className='text-[38px] text-borderYellow shadow'>MEET THE NEW TEAM</p>
         <div className='flex flex-col md:flex-row justify-between w-full p-2 gap-5'>
@@ -165,8 +165,8 @@ export default function Home() {
             
           </div>
         </div>
-        <div className='w-2/3'>
-          <p className='text-[38px] text-borderYellow shadow'>FAQ</p>
+        <div className='w-full sm:w-2/3'>
+          <p className='text-[38px] text-borderYellow shadow pl-2'>FAQ</p>
 
           <Accordion
             showDivider={false}
@@ -177,7 +177,7 @@ export default function Home() {
             <AccordionItem
               key="1"
               aria-label="how can i join solkongz"
-              title={<p className='text-borderYellow text-title w-full'>HOW CAN I JOIN SOLKONGZ</p>}
+              title={<p className='text-borderYellow text-content sm:text-title w-full'>HOW CAN I JOIN SOLKONGZ</p>}
               indicator={({ isOpen }) => (isOpen ? <FaMinus /> : <FaPlus />)}
             >
               <p className='text-content text-white '>You can acquire a SOLKONG either through secondary marketplaces like <Link href="https://magiceden.io/marketplace/solkongz" className='text-borderYellow underline' >Magic Eden</Link> , <Link href = "https://solsea.io/c/620fd1cc5f38c6260eb65ca1" className='text-borderYellow underline'>OpenSea</Link>  and SolSea OR you can apply to our <Link href="https://www.solkongz.net/scholarship-program" className='text-borderYellow underline'>Scholarship program</Link> . You might even get lucky in one of our giveaways </p>
@@ -185,7 +185,7 @@ export default function Home() {
             <AccordionItem
               key="2"
               aria-label="how can i join solkongz"
-              title={<p className='text-borderYellow text-title w-full'>WHAT IS THE TREEHOUSE</p>}
+              title={<p className='text-borderYellow text-content sm:text-title w-full'>WHAT IS THE TREEHOUSE</p>}
               indicator={({ isOpen }) => (isOpen ? <FaMinus /> : <FaPlus />)}
             >
               <p className='text-content text-white '>The Treehouse is an exclusive corner of the Jungle where all of the SOLKONGZ gather to socialize and share their knowledge/creations. The KONGZ are a solid tribe of gorillas that take care of one another to provide a safe-haven to grow within the mysterious Solana Jungle. This will also serve as a platform we can expand and add utility to in the future.</p>
@@ -193,7 +193,7 @@ export default function Home() {
             <AccordionItem
               key="3"
               aria-label="how can i join solkongz"
-              title={<p className='text-borderYellow text-title w-full'>{`WHAT'S NEXT`}</p>}
+              title={<p className='text-borderYellow text-content sm:text-title w-full'>{`WHAT'S NEXT`}</p>}
               indicator={({ isOpen }) => (isOpen ? <FaMinus /> : <FaPlus />)}
             >
               <p className='text-content text-white '>Keep an eye on our <Link href="https://twitter.com/SolKongz" className='text-borderYellow underline'>Twitter</Link> . We will be releasing more updates very soon.</p>

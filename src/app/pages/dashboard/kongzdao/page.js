@@ -16,7 +16,7 @@ export default function Home() {
             <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
             <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/pages/dashboard" />
             <div className='hidden md:flex justify-between gap-6 text-white text-content'>
-                <Link href = "#" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
+                <Link href = "/pages/dashboard/shop" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
                 <Link href = "https://t.co/I52MPobQbV" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
                 <Link href = "https://discord.gg/hrQX37Cs" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Discord</Link>
             </div>
@@ -27,9 +27,8 @@ export default function Home() {
                 <FaAlignJustify className="w-[16px] h-[16px]" />
             </div>
             {isOpen && (
-                <div className='absolute w-full bg-bgColor top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
-                <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
-                <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
+                <div className='absolute w-full bg-[#000] top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
+                <Link href="/pages/dashboard/shop"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
                 <Link href="https://t.co/I52MPobQbV" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
                 <Link href="https://discord.gg/hrQX37Cs" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Discord</Link>
                 </div>

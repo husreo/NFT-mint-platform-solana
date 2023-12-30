@@ -20,13 +20,15 @@ export default function Home({ params }: { params: { url:string}}) {
             <div className='w-full flex flex-col justify-center items-center relative'>
                 <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
                     <div className='flex gap-1'>
-                        <ScholashipBtn content = "BACK TO THE JUNGLE" url = "../dashboard" />
-                        <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
+                        <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/pages/dashboard" />
+                        <div className='hidden md:flex'>
+                            <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
+                        </div>
                     </div>
                     
                     <div className='hidden md:flex justify-between gap-6 text-white text-content'>
-                        <Link href = "dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
-                        <Link href = "#" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
+                        <Link href = "/pages/dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
+                        <Link href = "/pages/dashboard/shop" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
                         <Link href = "https://t.co/I52MPobQbV" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
                         <Link href = "https://discord.gg/hrQX37Cs" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Discord</Link>
                     </div>
@@ -37,9 +39,13 @@ export default function Home({ params }: { params: { url:string}}) {
                         <FaAlignJustify className="w-[16px] h-[16px]" />
                     </div>
                     {isOpen && (
-                        <div className='absolute w-full bg-bgColor top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
-                            <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
-                            <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
+                        <div className='absolute w-full bg-[rgb(255,107,255)] top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4 z-20'>
+                            <div className='w-full flex justify-center'>
+                                <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
+                            </div>
+
+                            <Link href="/pages/dashboard/kongzdao"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
+                            <Link href="/pages/dashboard/shop"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
                             <Link href="https://t.co/I52MPobQbV" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
                             <Link href="https://discord.gg/hrQX37Cs" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Discord</Link>
                         </div>
@@ -53,7 +59,7 @@ export default function Home({ params }: { params: { url:string}}) {
                 <div className='w-full md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4'>
                     <div className='text-title text-white text-center gap-6 w-full'><span>SOLKONGZ</span> - HL TOKEN <span className = "text-borderYellow">#1/5000</span><span className='text-title' > 1 SOL</span></div>
                     <div className = "relative">
-                        <img src = {assets[parseInt(params.url)].url} alt="no image" className = "w-[550px]" />
+                        <img src = {assets[parseInt(params.url)].url} alt="no image" className = "w-[550px] z-10" />
                         <button className = "text-[38px] text-borderYellow border-[0.5rem] border-b-[#111] border-r-[#111] absolute bottom-[-20px] bg-bgColor left-[calc(50%-6.7rem)] rounded-full px-4" >Comming Soon!</button>
                     </div>
                     <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: 2000 $PELL - 1x SOLKONGZ</p>

@@ -14,10 +14,10 @@ export default function Home() {
       {/* --------------------------------- Header --------------------------------- */}
       <div className='w-full flex flex-col justify-center items-center relative'>
         <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
-          <ScholashipBtn content = "BACK TO THE JUNGLE" url = "./dashboard" />
+          <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/pages/dashboard" />
           <div className='hidden md:flex justify-between gap-6 text-white text-content'>
-            <Link href = "./kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
-            <Link href = "#" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
+            <Link href = "/pages/dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
+            <Link href = "/pages/dashboard/shop" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
             <Link href = "https://t.co/I52MPobQbV" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
             <Link href = "https://discord.gg/hrQX37Cs" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Discord</Link>
           </div>
@@ -29,8 +29,8 @@ export default function Home() {
           </div>
           {isOpen && (
             <div className='absolute w-full bg-bgColor top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
-              <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
-              <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
+              <Link href="/pages/dashboard/kongzdao"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
+              <Link href="/pages/dashboard/shop"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
               <Link href="https://t.co/I52MPobQbV" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
               <Link href="https://discord.gg/hrQX37Cs" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Discord</Link>
             </div>
@@ -45,9 +45,9 @@ export default function Home() {
           <p className='text-borderYellow text-[38px] shadow text-center'>SolKongz Scholarship Program</p>
           <p className='text-white text-content'>{`The Scholarship Program is our way of onboarding skilled individuals into our community. Individuals that can benefit the KONGZ in one way or another gets the chance to receive their own SOLKONG free of charge and become a member of 'The Jungle'. If you believe that you have what it takes to become a community member, fill out the form and apply below.`}</p>
         </div>
-        <div className='w-4/5 border-1 border-[6px] border-borderYellow rounded-[10px] px-[20px] md:p-[30px] flex justify-around items-center gap-4'>
-            <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f06f35054141_pyM-3fPYw6JI5FRONxrYXHaIJHUFrZQ0Xg2ciLVm2q4-p-800.png' alt='no image' className='w-1/5' />
-            <div className='w-1/2 flex flex-col gap-1'>
+        <div className='w-4/5 border-1 border-[6px] border-borderYellow rounded-[10px] px-[20px] md:p-[30px] flex flex-col sm:flex-row justify-around items-center gap-4'>
+            <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f06f35054141_pyM-3fPYw6JI5FRONxrYXHaIJHUFrZQ0Xg2ciLVm2q4-p-800.png' alt='no image' className='w-1/2 mt-3 sm:mt-0 sm:w-1/5' />
+            <div className='w-full sm:w-1/2 flex flex-col gap-1'>
               <p className='text-borderYellow text-title shadow'>Discord ID</p>
               <input name='discord_id' className='w-full p-2 h-[40px]' />
               <p className='text-borderYellow text-title shadow'>Wallet Address</p>

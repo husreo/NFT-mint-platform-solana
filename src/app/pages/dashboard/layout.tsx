@@ -21,17 +21,11 @@ export default function DashboardLayout({
 }) {
 
   const network = WalletAdapterNetwork.Mainnet;
-  const wallets = useMemo(
-    () => [
-      new PhantomWalletAdapter(),
-      new SolflareWalletAdapter(),
-    ],
-    [network]
-  );
+  const wallet = new PhantomWalletAdapter();
 
   return (
       <ConnectionProvider endpoint={process.env.RPC_HOST || 'https://api.mainnet-beta.solana.com'}>
-        <WalletProvider wallets={wallets} autoConnect>
+        <WalletProvider wallets={[wallet]} autoConnect>
           <WalletModalProvider>
           <html lang="en">
             <body>{children}</body>

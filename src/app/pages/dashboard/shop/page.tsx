@@ -13,21 +13,22 @@ import { Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
 import { Environment, OrbitControls, useGLTF } from "@react-three/drei"
 
+export const Model = () => {
+    // location of the 3D model
+    const gltf = useGLTF("/img/3Dhoodiev3.glb");
+    console.log("glft -> ", gltf);
+    
+    return (
+      <>
+        {/* Use scale to control the size of the 3D model */}
+        <primitive object={gltf.scene} />
+      </>
+    );
+};
+
 export default function Home() {
     const [isOpen, setOpen] = useState(false);
 
-    const Model = () => {
-        // location of the 3D model
-        const gltf = useGLTF("/img/3Dhoodiev3.glb");
-        console.log("glft -> ", gltf);
-        
-        return (
-          <>
-            {/* Use scale to control the size of the 3D model */}
-            <primitive object={gltf.scene} scale={0.01} />
-          </>
-        );
-      };
     return (
         <div className='w-full bg-bgColor font-ShPinscher'>
         {/* --------------------------------- Header --------------------------------- */}
@@ -39,7 +40,7 @@ export default function Home() {
                     </div>
                     
                     <div className='hidden md:flex justify-between gap-6 text-white text-content'>
-                        <Link href = "dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
+                        <Link href = "/pages/dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
                         <Link href = "https://t.co/I52MPobQbV" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
                         <Link href = "https://discord.gg/hrQX37Cs" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Discord</Link>
                     </div>
@@ -51,8 +52,7 @@ export default function Home() {
                     </div>
                     {isOpen && (
                         <div className='absolute w-full bg-bgColor top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
-                            <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
-                            <Link href="#"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
+                            <Link href="/pages/dashboard/kongzdao"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
                             <Link href="https://t.co/I52MPobQbV" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
                             <Link href="https://discord.gg/hrQX37Cs" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Discord</Link>
                         </div>
@@ -65,7 +65,7 @@ export default function Home() {
             <div className='w-full flex flex-col justify-center items-center gap-20 pb-14 mt-12'>
                 <p className='text-title text-borderYellow'> SOLKONGZ OG HOODIE</p>
                 <p className='text-title text-white'> 1 $SOL EACH</p>
-                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 4], fov: 50 }}>
+                <Canvas shadows camera={{ position: [0, 0, -70], fov: 3 }} >
                     <Suspense fallback={null}>
                         <Model />
                         {/* To add environment effect to the model */}
