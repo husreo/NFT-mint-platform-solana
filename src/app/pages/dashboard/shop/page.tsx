@@ -6,13 +6,12 @@ import { FaAlignJustify, FaHouse, FaPlus, FaMinus } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import assets from '../../../util/images';
 import {
-	WalletConnectButton,
 	WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import { useRef } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber"
 import { OrbitControls, useGLTF, Environment } from "@react-three/drei"
-import { Mesh } from "three";
+// import { Mesh } from "three";
 // const Model = () => {
 //     // location of the 3D model
 //     const gltf = useGLTF("/img/3Dhoodiev3.glb");
@@ -26,17 +25,12 @@ import { Mesh } from "three";
 //     );
 // };
 function MeshComponent() {
-    const mesh = useRef<Mesh>(null!);
     const gltf = useGLTF("/img/3Dhoodiev3.glb");
   
-    useFrame(() => {
-      mesh.current.rotation.y += 0.01;
-    });
-  
     return (
-      <mesh ref={mesh}>
+      <>
         <primitive object={gltf.scene} />
-      </mesh>
+      </>
     );
   }
 export default function Home() {
@@ -49,7 +43,9 @@ export default function Home() {
                 <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
                     <div className='flex gap-1'>
                         <ScholashipBtn content = "BACK TO THE JUNGLE" url = "../dashboard" />
-                        <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
+                        <div className='hidden md:flex'>
+                            <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
+                        </div>
                     </div>
                     
                     <div className='hidden md:flex justify-between gap-6 text-white text-content'>
@@ -65,6 +61,9 @@ export default function Home() {
                     </div>
                     {isOpen && (
                         <div className='absolute w-full bg-bgColor top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
+                            <div className='w-full flex justify-center'>
+                                <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
+                            </div>
                             <Link href="/pages/dashboard/kongzdao"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
                             <Link href="https://t.co/I52MPobQbV" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
                             <Link href="https://discord.gg/hrQX37Cs" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Discord</Link>
@@ -78,7 +77,7 @@ export default function Home() {
             <div className='w-full flex flex-col justify-center items-center gap-20 pb-14 mt-12'>
                 <p className='text-title text-borderYellow'> SOLKONGZ OG HOODIE</p>
                 <p className='text-title text-white'> 1 $SOL EACH</p>
-                <div className='flex justify-center items-center h-screen w-full'>
+                <div className='flex justify-center items-center h-screen w-2/3'>
                     <Canvas className='h-full w-full'>
                         <OrbitControls />
                         <ambientLight />

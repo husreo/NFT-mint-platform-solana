@@ -42,6 +42,11 @@ body {
 .box_shadow {
   box-shadow: 5px 10px 8px #333;
 }
+
+.pink_shadow {
+  box-shadow: 5px 10px 8px pink;
+
+}
 /*===================*/
 /* WOOBLE VERTICAL
 /*===================*/

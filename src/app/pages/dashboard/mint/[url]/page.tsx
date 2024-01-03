@@ -6,7 +6,6 @@ import { FaAlignJustify, FaHouse, FaPlus, FaMinus } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import assets from '../../../../util/images';
 import {
-	WalletConnectButton,
 	WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 

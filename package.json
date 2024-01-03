@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@metaplex-foundation/js": "^0.19.4",
     "@nextui-org/react": "^2.2.9",
     "@project-serum/anchor": "^0.26.0",
     "@react-three/drei": "^9.92.7",
