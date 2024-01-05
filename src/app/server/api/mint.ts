@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import * as web3 from "@solana/web3.js"
 import { Connection, clusterApiUrl, PublicKey, Signer, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js"
 import {
@@ -10,6 +11,7 @@ import {
     toBigNumber,
 } from "@metaplex-foundation/js"
 import * as fs from "fs";
+import { initializeKeypair } from "./initializeKeypair";
 
 interface NftData {
     name: string
@@ -31,7 +33,7 @@ interface CollectionNftData {
 
 // example data for a new NFT
 const nftData = [{
-    name: "Pionner #18",
+    name: "SolKongz #18",
     symbol: "WL",
     description: "Example nft for pioneer legends",
     sellerFeeBasisPoints: 500,
@@ -70,7 +72,7 @@ async function uploadMetadata(
             category: "image",
             creators: [
                 {
-                    address: "G2sc5mU3eLRkbRupnupzB3NTzZ85bnc9L1ReAre9dzFU",
+                    address: "nQGa8aXWfRSbzfsZ8dvQ7cu6K31LTc9rk7qoU6E217g",
                     share: 100
                 }
             ],
@@ -105,12 +107,12 @@ async function mintMasterEdition(
 
     const { nft } = await metaplex.nfts().create({
         uri,
-        name: "Pionner #18",
-        symbol: "PL",
+        name: "SolKongz #18",
+        symbol: "WL",
         sellerFeeBasisPoints: 500,
         creators: [
             {
-                address: new PublicKey("G2sc5mU3eLRkbRupnupzB3NTzZ85bnc9L1ReAre9dzFU"),
+                address: new PublicKey("nQGa8aXWfRSbzfsZ8dvQ7cu6K31LTc9rk7qoU6E217g"),
                 authority: keypair,
                 share: 100,
             }
@@ -154,7 +156,7 @@ async function mintNft() {
 
     const connection = new Connection(RPC);
 
-    const user = web3.Keypair.fromSecretKey(Uint8Array.from([]));
+    const user = await initializeKeypair(connection);
     console.log("PublicKey:", user.publicKey.toBase58());
 
     const balance = await connection.getBalance(user.publicKey);
@@ -173,7 +175,6 @@ async function mintNft() {
 
 }
 
-export default mintNft
 // main()
 //     .then(() => {
 //         console.log("Finished successfully")
@@ -183,3 +184,29 @@ export default mintNft
 //         console.log(error)
 //         process.exit(1)
 //     })
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse
+) {
+    const {
+        query: { id },
+        method,
+    } = req
+
+    switch (method) {
+        case 'GET':
+            mintNft()
+                .then(() => {
+                    console.log("Finished successfully")
+                    res.status(200).json({ success: true })
+                })
+                .catch((error) => {
+                    console.log(error)
+                    res.status(400).json({ success: false })
+                })
+            break;
+    
+        default:
+            break;
+    }
+}
