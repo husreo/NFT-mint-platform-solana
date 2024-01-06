@@ -4,7 +4,7 @@ import ScholashipBtn from '../../component/ScholashipBtn'
 import Link from 'next/link'
 // import { useRouter } from 'next/router';
 import assets from '../../util/images';
-import { FaAlignJustify, FaHouse, FaPlus, FaMinus, FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import { FaAlignJustify, FaHouse, FaPlus, FaMinus, FaAngleLeft, FaAngleRight, FaXTwitter } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import {Accordion, AccordionItem} from "@nextui-org/react";
 import { Carousel } from '@trendyol-js/react-carousel';
@@ -120,13 +120,13 @@ export default function Home() {
           <FaAngleRight className='text-white text-title' />
         </div>} rightArrow={<div className=' items-center justify-center cursor-pointer h-full w-[20px] md:w-[200px] flex rotate-180'>
           <FaAngleLeft className='text-white text-title' />
-        </div>} className='h-[350px] md:h-[600px]'>
+        </div>} className='h-[200px] md:h-[600px]'>
           {
             assets.map((val, index) => {
-              return <div key = {val.url + index} className='relative w-[300px] sm:w-[500px]'>
-                <img src={val.url} alt="" className=' w-[300px] sm:w-[500px]  rounded-[15px] border-8 border-borderYellow pink_shadow' />
+              return <div key = {val.url + index} className='relative w-[160px] sm:w-[500px]'>
+                <img src={val.url} alt="" className=' w-[160px] sm:w-[500px]  rounded-[15px] border-8 border-borderYellow pink_shadow' />
                 <div className='absolute w-full flex justify-center items-center bottom-[-25px]'>
-                  <Link href={`/pages/dashboard/mint/${index}`}><button className=' pink_shadow text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-[38px]'>{val.title}</button></Link>
+                  <Link href={`/pages/dashboard/mint/${index}`}><button className=' pink_shadow text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-content sm:text-[38px]'>{val.title}</button></Link>
 
                 </div>
               </div>
@@ -140,31 +140,31 @@ export default function Home() {
         </div>
         <p className='text-[38px] text-borderYellow shadow'>MEET THE NEW TEAM</p>
         <div className='flex flex-col md:flex-row justify-between w-full p-2 gap-5'>
-          <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between'>
+          <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between items-center'>
             <div className='relative dashoboard__teamimg'>
               <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f04be8054138_KERFASKEN.png'className='box_shadow border-[3px] border-borderYellow' />
               <p className=' box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>KEFARSKEN</p>
             </div>
             <p className='text-content text-white p-1 md:p-8 '>{`Hi I'm kefarsken and I am an OG member of the SolKongz community. I'm here to guide the KONGZ on the journey through the Solana Jungle.`}</p>
-            <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Ekefarsken&region=follow_link&screen_name=kefarsken" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center">FOLLOW KEFARSKEN</Link>
+            <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Ekefarsken&region=follow_link&screen_name=kefarsken" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center flex justify-center items-center w-1/2"><FaXTwitter/> FOLLOW KEFARSKEN</Link>
           </div>
-          <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between'>
+          <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between items-center'>
             <div className='relative dashoboard__teamimg'>
               <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f01749054127_kFBsN2DoXnpuTJUEZB-t7nY0aHAqvDFIihlEQp0SREA.png'className='box_shadow border-[3px] border-borderYellow' />
               <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>NATE</p>
             </div>
             <p className='text-content text-white p-1 md:p-8 '>{`Yo its Nate the degenerate jpeg collector from Manchester, England. I like to create things but most importantly,
             I love the KONGZ. LET'S F*CKING GOOOO!`}</p>
-            <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Ec0gnate&region=follow_link&screen_name=c0gnate" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center">FOLLOW Nate</Link>
+            <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Ec0gnate&region=follow_link&screen_name=c0gnate" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center flex justify-center items-center w-1/2"><FaXTwitter/> FOLLOW Nate</Link>
             
           </div>
-          <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between '>
+          <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between items-center'>
             <div className='relative dashoboard__teamimg w-full'>
               <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/65538a4a6913d3aab0b9afe3_teaserv1.png'className='box_shadow border-[3px] border-borderYellow w-full' />
               <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>???</p>
             </div>
             <p className='text-content text-white p-1 md:p-8 '>We are currently looking for a fulltime RUST developer to work on the project and help us build our dreams. Could this be you? If so please contact the team ASAP.</p>
-            <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Esolkongz&region=follow_link&screen_name=solkongz" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center">FOLLOW SolKongz</Link>
+            <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Esolkongz&region=follow_link&screen_name=solkongz" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center flex justify-center items-center w-1/2"><FaXTwitter/> FOLLOW SolKongz</Link>
             
           </div>
         </div>
