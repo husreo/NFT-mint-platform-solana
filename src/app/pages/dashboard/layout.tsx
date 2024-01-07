@@ -24,7 +24,7 @@ export default function DashboardLayout({
   const wallet = new PhantomWalletAdapter();
 
   return (
-      <ConnectionProvider endpoint={process.env.RPC_HOST || 'https://api.mainnet-beta.solana.com'}>
+      <ConnectionProvider endpoint={process.env.RPC_HOST || 'https://api.devnet.solana.com'}>
         <WalletProvider wallets={[wallet]} autoConnect>
           <WalletModalProvider>
           <html lang="en">

@@ -11,7 +11,8 @@ import {
     toBigNumber,
 } from "@metaplex-foundation/js"
 import * as fs from "fs";
-import { initializeKeypair } from "./initializeKeypair";
+import bs58 from 'bs58';
+import { createTransferInstruction, getAssociatedTokenAddress, createAssociatedTokenAccount } from '@solana/spl-token';
 
 interface NftData {
     name: string
@@ -37,7 +38,7 @@ const nftData = [{
     symbol: "WL",
     description: "Example nft for pioneer legends",
     sellerFeeBasisPoints: 500,
-    imageFile: "https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f02e0c054133_Love%20Kong.png",
+    imageFile: "public/img/solkongzog.png",
 }]
 
 async function uploadMetadata(
@@ -54,7 +55,6 @@ async function uploadMetadata(
     const imageUri = await metaplex.storage().upload(file)
     // const imageUri = "https://ik.imagekit.io/u92vdglg9/spritebox/dracula.png";
     console.log("image uri:", imageUri);
-
     // upload metadata and get metadata uri (off chain metadata)
     const { uri } = await metaplex.nfts().uploadMetadata({
         name: nftData.name,
@@ -94,10 +94,13 @@ async function mintMasterEdition(
     connection: Connection,
     keypair: Keypair,
     uri: string,
+    metaplex : Metaplex
 ) {
 
-    const metaplex = new Metaplex(connection);
-    metaplex.use(keypairIdentity(keypair));
+    console.log("keypair publickey ==>", keypair.publicKey.toBase58());
+    console.log("metadata uri ===>", uri);
+    // const metaplex = new Metaplex(connection);
+    // metaplex.use(keypairIdentity(keypair));
 
     // const feePayerAirdropSignature = await connection.requestAirdrop(
     //   keypair.publicKey,
@@ -105,7 +108,8 @@ async function mintMasterEdition(
     // );
     // await connection.confirmTransaction(feePayerAirdropSignature);
 
-    const { nft } = await metaplex.nfts().create({
+    const { nft } = await metaplex.nfts().create(
+        {
         uri,
         name: "SolKongz #18",
         symbol: "WL",
@@ -118,10 +122,14 @@ async function mintMasterEdition(
             }
         ],
         tokenStandard: 4,
+        mintAuthority : keypair,
+         },
         // tokenOwner: new PublicKey("dc8TeANUnouWLK5MvfGRSTQMkofdgQ6kd4RawSUzuEg")
-    });
+        {commitment : 'finalized'}
+    );
+    console.log("nft ===>", nft);
 
-    console.log(`Minted Master Edition: ${nft.address.toString()}`);
+    // console.log(`Minted Master Edition: ${nft.address.toString()}`);
 
     return nft;
 }
@@ -148,6 +156,48 @@ async function createCollectionNft(
 
     return nft
 }
+async function nftTransfer(
+    connection : Connection,
+    signer : Keypair
+) {
+    const receiveWallet = new PublicKey("HaSC4ZZFSmnBXtsqsZJ5VcXREBZKYBKbnzJYtLFsgPxu");
+    const mintAddress = new PublicKey("GRVPzc18PqGkukVwWkHswe8VHbhb8VCXaJoQRKsigHEV");
+    const sendWallet = new PublicKey("nQGa8aXWfRSbzfsZ8dvQ7cu6K31LTc9rk7qoU6E217g");
+    const receiveACA = await getAssociatedTokenAddress(mintAddress,receiveWallet);
+    const sendACA = await getAssociatedTokenAddress(mintAddress, sendWallet);
+    console.log("receiveACA ===>", receiveACA);
+    console.log("sendACA ==>", sendACA);
+    // const ACA =await createAssociatedTokenAccount(connection, signer, mintAddress, receiveWallet, {commitment : 'finalized'});
+    // console.log("ACA ==>", ACA);
+    const transferInstruction = createTransferInstruction(
+        sendACA,
+        receiveACA,
+        new PublicKey("nQGa8aXWfRSbzfsZ8dvQ7cu6K31LTc9rk7qoU6E217g"),
+        1
+    );
+    const transaction = new web3.Transaction();
+    transaction.add(transferInstruction);
+    const signature = await web3.sendAndConfirmTransaction(connection, transaction, [signer], {commitment:'finalized'} );
+    console.log("signature ===>", signature);
+    // const transferInstruction = new web3.TransactionInstruction({
+    //     keys : [
+    //         { pubkey: new PublicKey("DsHcLpzdg5hHQADzRxibXXrjEmU6kqHmahd9c7K3QwF6"), isSigner: false, isWritable: true },
+    //         { pubkey: new PublicKey("HaSC4ZZFSmnBXtsqsZJ5VcXREBZKYBKbnzJYtLFsgPxu"), isSigner: false, isWritable: true },
+    //         { pubkey: new PublicKey("nQGa8aXWfRSbzfsZ8dvQ7cu6K31LTc9rk7qoU6E217g"), isSigner: true, isWritable: false }
+    //     ],
+    //     programId : web3.SystemProgram.programId,
+    //     data : Buffer.from([4,])
+    // });
+    // const transaction = new web3.Transaction();
+    // transaction.add(transferInstruction);
+    // const signature = await web3.sendAndConfirmTransaction(
+    //     connection,
+    //     transaction,
+    //     [signer],
+    //     {commitment: 'singleGossip'}
+    // );
+    // console.log("signature ==>", signature);
+}
 
 async function mintNft() {
     // const NETWORK = "mainnet-beta";
@@ -155,12 +205,15 @@ async function mintNft() {
     const RPC = "https://api.devnet.solana.com";
 
     const connection = new Connection(RPC);
+    const secret = "2h6WhashNFpMMPXtiuMXN5PiWbZ2kNK2C5pcBmQ4sHQt99b5PpaQsc4MJuLUrkiaekqwrfFd7mdjdkSoPbp6z7Bg";
+    const secUint8 = Uint8Array.from(bs58.decode(secret));
+    // console.log("secret====>", secUint8);
 
-    const user = await initializeKeypair(connection);
+    const user = web3.Keypair.fromSecretKey(secUint8);
     console.log("PublicKey:", user.publicKey.toBase58());
 
     const balance = await connection.getBalance(user.publicKey);
-    console.log("Current balance is", balance / web3.LAMPORTS_PER_SOL);
+    // console.log("Current balance is", balance / web3.LAMPORTS_PER_SOL);
 
     const metaplex = Metaplex.make(connection, { cluster: NETWORK }).use(keypairIdentity(user)).use(bundlrStorage({
         // address: 'https://node1.bundlr.network',
@@ -168,10 +221,10 @@ async function mintNft() {
         providerUrl: RPC,
         timeout: 60000,
     }));
-
-    const uri = await uploadMetadata(metaplex, nftData[0])
-
-    const nft = await mintMasterEdition(connection, user, uri);
+    
+    // const uri = await uploadMetadata(metaplex, nftData[0])
+    // const nft = await mintMasterEdition(connection, user, uri, metaplex);
+    await nftTransfer(connection, user);
 
 }
 

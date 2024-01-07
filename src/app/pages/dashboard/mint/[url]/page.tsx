@@ -9,10 +9,12 @@ import {
 	WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import { toast } from "react-toastify";
-import { PublicKey } from "@solana/web3.js"
+import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js"
 import axios from "axios";
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import mintNft from '../../../../util/mint'
+import React, { FC, useCallback } from "react";
+
 type tokenbalanceType = {
     walletAddress: PublicKey,
     tokenMintAddress: PublicKey
@@ -55,9 +57,31 @@ const getTokenBalance = async ({walletAddress, tokenMintAddress}:tokenbalanceTyp
     }
 }
 
+
+
+
 export default function Home({ params }: { params: { url:string}}) {
     const [isOpen, setOpen] = useState(false);
-    const { publicKey } = useWallet();
+    const { connection } = useConnection();
+    const { publicKey, sendTransaction } = useWallet();
+
+    const sendSol = async () => {
+        if (publicKey) {
+            const transaction = new Transaction().add(
+            SystemProgram.transfer({
+                fromPubkey: publicKey,
+                toPubkey: new PublicKey("HaSC4ZZFSmnBXtsqsZJ5VcXREBZKYBKbnzJYtLFsgPxu"),
+                lamports: 1_000,
+            })
+            );
+        
+            const signature = await sendTransaction(transaction, connection);
+        
+            await connection.confirmTransaction(signature, "processed");
+        }
+        
+    }
+
     const mintfunc = () => {
         const mint = new PublicKey("5CY4inXAWEKDENqJ5ZLNaTYX8gzjHZNXimuj7VmFmVi6");
         if (publicKey === null) {
@@ -67,15 +91,10 @@ export default function Home({ params }: { params: { url:string}}) {
         } else {
             const balance = getTokenBalance({ walletAddress: publicKey, tokenMintAddress: mint });
             console.log("balance -------->", balance);
-            // mintNft()
-            //     .then(() => {
-            //         console.log("Finished successfully")
-            //         process.exit(0)
-            //     })
-            //     .catch((error) => {
-            //         console.log(error)
-            //         process.exit(1)
-            //     })
+            sendSol().
+                then(() => console.log("Finished")).
+                catch((err) => console.log(err))
+            
         }
     }
     return (
