@@ -215,16 +215,16 @@ async function mintNft() {
     const balance = await connection.getBalance(user.publicKey);
     // console.log("Current balance is", balance / web3.LAMPORTS_PER_SOL);
 
-    const metaplex = Metaplex.make(connection, { cluster: NETWORK }).use(keypairIdentity(user)).use(bundlrStorage({
+    const metaplex = Metaplex.make(connection, { cluster: NETWORK }).use(walletAdapterIdentity(user)).use(bundlrStorage({
         // address: 'https://node1.bundlr.network',
         address: 'https://devnet.bundlr.network',
         providerUrl: RPC,
         timeout: 60000,
     }));
     
-    // const uri = await uploadMetadata(metaplex, nftData[0])
-    // const nft = await mintMasterEdition(connection, user, uri, metaplex);
-    await nftTransfer(connection, user);
+    const uri = await uploadMetadata(metaplex, nftData[0])
+    const nft = await mintMasterEdition(connection, user, uri, metaplex);
+    // await nftTransfer(connection, user);
 
 }
 

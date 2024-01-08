@@ -9,16 +9,21 @@ import {
 	WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import { toast } from "react-toastify";
-import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js"
+import { PublicKey, SystemProgram, Transaction, Connection } from "@solana/web3.js"
 import axios from "axios";
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import mintNft from '../../../../util/mint'
 import React, { FC, useCallback } from "react";
+import { buildSplTransferTx } from '../../../../util/buildSplTransferTx';
 
 type tokenbalanceType = {
     walletAddress: PublicKey,
     tokenMintAddress: PublicKey
 }
+
+const connection = new Connection(
+    "https://api.devnet.solana.com",
+    "confirmed"
+  );
 
 const getTokenBalance = async ({walletAddress, tokenMintAddress}:tokenbalanceType) => {
     const response = await axios({
@@ -57,44 +62,44 @@ const getTokenBalance = async ({walletAddress, tokenMintAddress}:tokenbalanceTyp
     }
 }
 
-
-
-
 export default function Home({ params }: { params: { url:string}}) {
     const [isOpen, setOpen] = useState(false);
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
+    const wallet = useWallet()
 
     const sendSol = async () => {
         if (publicKey) {
             const transaction = new Transaction().add(
-            SystemProgram.transfer({
-                fromPubkey: publicKey,
-                toPubkey: new PublicKey("HaSC4ZZFSmnBXtsqsZJ5VcXREBZKYBKbnzJYtLFsgPxu"),
-                lamports: 1_000,
-            })
+                SystemProgram.transfer({
+                    fromPubkey: publicKey,
+                    toPubkey: new PublicKey("HaSC4ZZFSmnBXtsqsZJ5VcXREBZKYBKbnzJYtLFsgPxu"),
+                    lamports: 1_000,
+                })
             );
         
             const signature = await sendTransaction(transaction, connection);
-        
             await connection.confirmTransaction(signature, "processed");
         }
-        
     }
 
-    const mintfunc = () => {
+    const mintfunc = async () => {
         const mint = new PublicKey("5CY4inXAWEKDENqJ5ZLNaTYX8gzjHZNXimuj7VmFmVi6");
         if (publicKey === null) {
             toast.error("Please connect your wallet first");
             console.log("connect wallet");
-            
         } else {
             const balance = getTokenBalance({ walletAddress: publicKey, tokenMintAddress: mint });
             console.log("balance -------->", balance);
-            sendSol().
+            // sendSol().
+            //     then(() => console.log("Finished")).
+            //     catch((err) => console.log(err))
+            const sender = publicKey;
+            const tokenMint = new PublicKey("5CY4inXAWEKDENqJ5ZLNaTYX8gzjHZNXimuj7VmFmVi6");
+            const receiver = new PublicKey("HaSC4ZZFSmnBXtsqsZJ5VcXREBZKYBKbnzJYtLFsgPxu");
+            buildSplTransferTx(connection, sender, tokenMint, 6, receiver, 800, wallet).
                 then(() => console.log("Finished")).
                 catch((err) => console.log(err))
-            
         }
     }
     return (
