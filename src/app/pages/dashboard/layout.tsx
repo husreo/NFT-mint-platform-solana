@@ -13,7 +13,7 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
-
+import { MetaplexProvider } from "./MetaplexProvider";
 export default function DashboardLayout({
   children,
 }: {
@@ -27,9 +27,12 @@ export default function DashboardLayout({
       <ConnectionProvider endpoint={process.env.RPC_HOST || 'https://api.devnet.solana.com'}>
         <WalletProvider wallets={[wallet]} autoConnect>
           <WalletModalProvider>
-          <html lang="en">
-            <body>{children}</body>
-          </html>
+            <MetaplexProvider>
+
+              <html lang="en">
+                <body>{children}</body>
+              </html>
+            </MetaplexProvider>
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

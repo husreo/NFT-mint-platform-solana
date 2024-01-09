@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/pages/api/auth/[...nextauth].js", "src/pages/api/user/index.js", "src/pages/api/history/index.js"  ],
+, "src/pages/api/auth/[...nextauth].js", "src/pages/api/user/index.js", "src/pages/api/history/index.js", "src/app/pages/dashboard/kongzmint/page.js"  ],
   "exclude": [
     "node_modules"
   ]
