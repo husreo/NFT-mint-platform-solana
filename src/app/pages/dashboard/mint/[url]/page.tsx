@@ -26,9 +26,7 @@ export default function Home({ params }: { params: { url:string}}) {
                 <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
                     <div className='flex gap-1'>
                         <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/pages/dashboard" />
-                        <div className='hidden md:flex'>
-                            <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
-                        </div>
+                        
                     </div>
                     
                     <div className='hidden md:flex justify-between gap-6 text-white text-content'>

@@ -6,6 +6,7 @@ import Countdown from '../../../component/CountDown';
 import { MINT_STATES, OG_TOKEN, WL_TOKEN } from '../../../util/config';
 import { errorAlert, infoAlert, successAlert } from '../../../component/ToastGroup';
 import { getAtaForMint } from '../../../util/misc';
+import { BsDash, BsPlusLg } from 'react-icons/bs'
 
 import Link from 'next/link'
 import { FaAlignJustify, FaHouse, FaPlus, FaMinus } from "react-icons/fa6";
@@ -32,7 +33,7 @@ import { Keypair, Transaction } from '@solana/web3.js';
 type wallet = AnchorWallet | undefined;
 
 const candyMachineId =
-  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "EowhSrBSgR4ogjKZBh11Z6TvWjKXszHS6sup2e8JQZyP";
+  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "71TofHCQhck3DzEq3mg363nGEAGjrxTdd7JYLyvq8ftD";
 
 export default function Home() {
 
@@ -43,7 +44,7 @@ export default function Home() {
     CandyMachine<DefaultCandyGuardSettings> | undefined
   >(undefined);
   const [numberValue, setNumberValue] = useState<number>(1);
-  const [mintText, setMintText] = useState<string>('Pixelated Apes'); 
+//   const [mintText, setMintText] = useState<string>('Pixelated Apes'); 
   const [mintLimited, setMintLimited] = useState<number>(0);
 
   const [mintState, setMintState] = useState<keyof typeof MINT_STATES>("NOT_STARTED");
@@ -112,8 +113,6 @@ export default function Home() {
     const now = Date.now() / 1000;
 
     console.log("wallet: ", wallet?.publicKey.toBase58());
-    console.log("cndy wallet: ", cndy?.candyGuard?.groups[4].guards.addressGate?.address.toBase58());
-
     if (now < cndy?.candyGuard?.groups[0].guards.startDate?.date.toNumber()) {
       console.log("mint not started");
       setMintState("NOT_STARTED");
@@ -135,7 +134,7 @@ export default function Home() {
       setMintState("WL");
       setNextTime(
         new Date(
-          cndy?.candyGuard?.groups[3].guards.startDate?.date.toNumber() * 1000
+          cndy?.candyGuard?.groups[2].guards.startDate?.date.toNumber() * 1000
         )
       );
     } else if (now > cndy?.candyGuard?.groups[2].guards.startDate?.date.toNumber()) {
@@ -157,13 +156,13 @@ export default function Home() {
 
     if (cndy.itemsLoaded == cndy.itemsMinted.toNumber())
       setSoldOut(true);
-
-    if (mintState == "OG")
-      setMintLimited(3);
-    else if (mintState == "WL")
-      setMintLimited(2);
-    else
-      setMintLimited(10);
+    setMintLimited(cndy.itemsLoaded - cndy.itemsMinted.toNumber());
+    // if (mintState == "OG")
+    //   setMintLimited(3);
+    // else if (mintState == "WL")
+    //   setMintLimited(2);
+    // else
+    //   setMintLimited(10);
   };
 
   const onMint = async () => {
@@ -267,10 +266,13 @@ export default function Home() {
         {/* --------------------------------- Header --------------------------------- */}
         <div className='w-full flex flex-col justify-center items-center relative'>
             <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
-                <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/pages/dashboard" />
-                <div className='hidden md:flex'>
-                    <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
+                <div className='flex gap-2'>
+                    <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/pages/dashboard" />
+                    <div className='hidden md:flex'>
+                        <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
+                    </div>
                 </div>
+                
                 <div className='hidden md:flex justify-between gap-6 text-white text-content'>
                     <Link href = "/pages/dashboard/shop" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
                     <Link href = "https://t.co/I52MPobQbV" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
@@ -299,13 +301,62 @@ export default function Home() {
 
         <div className='w-full flex flex-col justify-between items-center gap-20 pb-14'>
             <div className='w-full md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4'>
-                <div className='text-title text-white text-center gap-6 w-full'><span>SOLKONGZ</span> - HL TOKEN <span className = "text-borderYellow">#1/5000</span><span className='text-title' > 1 SOL</span></div>
-                <div className = "relative">
-                    <img src = {assets[1].url} alt="no image" className = "w-[550px] z-10" />
-                    <button className = "text-[38px] text-borderYellow border-[0.5rem] border-b-[#111] border-r-[#111] absolute bottom-[-20px] bg-bgColor left-[calc(50%-6.7rem)] rounded-full px-4" >Comming Soon!</button>
-                </div>
+                <div className='text-title text-white text-center gap-6 w-full'><span>SOLKONGZ</span> - HL TOKEN <span className = "text-borderYellow">#1/5000</span><span className='text-title' > {MINT_STATES[mintState].solPrice} SOL</span></div>
+                {soldOut == true &&
+                    <div className='w-full text-center font-extrabold text-[80px] text-amber-800 md2:text-[60px]' >
+                        Sold Out
+                    </div>
+                }
+                {soldOut == false && 
+                    <div>
+                        <div className = "relative">
+                            <img src = {assets[1].url} alt="no image" className = "w-[550px] z-10" />
+                            <div className='w-full absolute bottom-[-20px] flex items-center justify-center'>
+                                <button className = "text-[38px] text-borderYellow border-[0.5rem] border-b-[#111] border-r-[#111]  bg-bgColor rounded-full px-4" onClick={() => onMint()}>{mintState != "NOT_STARTED" ? "Mint" : "Comming Soon"}</button>
+                            </div>
+                        </div>
+                        <Countdown nextTime={mintState == "ENDED" ? null : nextTime} mintState={mintState} refresh={refreshCandyMachineState} />
+                        {mintState != "NOT_STARTED" && mintState != "ENDED" && (
+                            <div className='flex flex-col items-center justify-center w-full h-full gap-6'>
+                                <div className='flex flex-row items-center justify-between w-full h-full px-3 text-white md2:px-10' >
+                                    <div
+                                        onClick={() => incrementValue(false)}
+                                        className={`${numberValue < 2
+                                        ? 'cursor-not-allowed'
+                                        : 'cursor-pointer'
+                                        } w-[60px] h-[60px] flex flex-row rounded-full bg-[#10141f] items-center justify-center hover:bg-[#36272b]`
+                                        }
+                                    >
+                                        <BsDash style={{ color: '#ffffff', fontSize: '20px' }} />
+                                    </div>
+                                    <div className='text-[24px] md2:text-[36px] font-bold' >
+                                        {numberValue}
+                                    </div>
+                                    <div
+                                        onClick={() => incrementValue(true)
+                                        }
+                                        className={`${numberValue >= mintLimited
+                                        ? 'cursor-not-allowed'
+                                        : 'cursor-pointer'
+                                        } w-[60px] h-[60px] flex flex-row rounded-full bg-[#10141f] items-center justify-center hover:bg-[#36272b]`}
+                                    >
+                                        <BsPlusLg
+                                        style={{ color: '#ffffff', fontSize: '20px' }}
+                                        />
+                                    </div>
+                                </div>
+                                {
+                                    (mintState == "OG" || mintState == "WL") && (<div className='w-full flex justify-center text-white text-[16px] font-semibold' >
+                                        {mintLimited} Mint per wallet allowed
+                                    </div>)
+                                }
+                            </div>
+                        )}
+                    </div>
+                }
                 <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: 2000 $PELL - 1x SOLKONGZ</p>
                 <p className = "text-white text-title text-center" >This WL Token grants the holder access to the newly discovered Jungle Orphanage, and the chance to adopt their very own BabyKong</p>
+                <p className = "text-white text-title text-center" >Total minted: {itemsMinted} / {itemsAvailable}</p>
             </div>
             <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/65538cbacb0d5c7a11b62978_Screenshot%202023-11-14%20150417.png' alt='no imgage' />
             <div className='flex w-full gap-8'>

@@ -13,7 +13,7 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
-import { MetaplexProvider } from "./MetaplexProvider";
+import { ToastContainer, toast } from 'react-toastify';
 export default function DashboardLayout({
   children,
 }: {
@@ -27,12 +27,10 @@ export default function DashboardLayout({
       <ConnectionProvider endpoint={process.env.RPC_HOST || 'https://api.devnet.solana.com'}>
         <WalletProvider wallets={[wallet]} autoConnect>
           <WalletModalProvider>
-            <MetaplexProvider>
-
+              <ToastContainer/> 
               <html lang="en">
                 <body>{children}</body>
               </html>
-            </MetaplexProvider>
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

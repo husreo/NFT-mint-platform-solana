@@ -23,5 +23,5 @@ export const MINT_STATES = {
 //  Public mint ends in:
 //  ENDED
 
-export const OG_TOKEN = new PublicKey("Epj886ocojGbny7qdFgaJHgqU21eoxWhJ65JH25tEHKZ");
-export const WL_TOKEN = new PublicKey("5PouzKSqGoWjcBngnFz4BEKFqFBa2GotwdbCpnmN77Sd");
+export const OG_TOKEN = new PublicKey("5CY4inXAWEKDENqJ5ZLNaTYX8gzjHZNXimuj7VmFmVi6");
+export const WL_TOKEN = new PublicKey("5CY4inXAWEKDENqJ5ZLNaTYX8gzjHZNXimuj7VmFmVi6");

@@ -12,12 +12,12 @@ const Countdown = ({ nextTime, mintState, refresh }) => {
                         Mint Ended
                     </div>
                 ) : (
-                    <>
-                        <h1 className="text-xl text-white">{mintText}</h1>
+                    <div className="w-full flex flex-col items-center">
+                        <h1 className="text-xl text-white mt-5">{mintText}</h1>
                         <div className="mt-5 text-2xl font-extrabold text-amber-900 md:text-3xl animate-bounce">
                             <span>{days} D</span>: <span>{hours} H</span>: <span>{minutes} M</span>: <span>{seconds} S</span>
                         </div>
-                    </>
+                    </div>
                 )}
             </>
         );
@@ -25,6 +25,7 @@ const Countdown = ({ nextTime, mintState, refresh }) => {
 
     useEffect(() => {
         if (mintState === "OG") setMintText("OG mint ends in :");
+        else if (mintState === "NOT_STARTED") setMintText("OG mint starts in :");
         else if (mintState === "WL") setMintText("WL mint ends in:");
         else if (mintState === "PUBLIC") setMintText("Public mint ends in:");
 
