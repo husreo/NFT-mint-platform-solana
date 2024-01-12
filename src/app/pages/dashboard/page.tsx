@@ -14,9 +14,9 @@ export default function Home() {
   const [isOpen, setOpen] = useState(false);
   // const router = useRouter();
   const itemClasses = {
-    base: "py-0 w-full",
-    title: "font-normal text-medium",
-    trigger: "px-2 py-0 data-[hover=true]:bg-default-100 rounded-lg h-14 flex justify-between items-center",
+    base: "py-0 w-full ",
+    title: "text-borderYellow text-content sm:text-title w-full text-white data-[open=true]:text-borderYellow shadow",
+    trigger: "px-2 py-0 rounded-lg h-14 flex justify-between items-center",
     indicator: "text-borderYellow",
     content: "text-small px-2",
   };
@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div className='w-full bg-bgColor font-ShPinscher'>
       {/* --------------------------------- Header --------------------------------- */}
-      <div className='w-full flex flex-col justify-center items-center relative bg-[#0F293F]'>
+      <div className='w-full flex flex-col justify-center items-center relative'>
         <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
           <ScholashipBtn content = "APPLY FOR A SCHOLARSHIP" url = "/pages/dashboard/contact" />
           <div className='hidden md:flex justify-between gap-6 text-white text-content'>
@@ -50,7 +50,7 @@ export default function Home() {
         </div>
       </div>
       {/* --------------------------------- Header End ----------------------------- */}
-      <img src='https://cdn.discordapp.com/attachments/1187092566752116806/1188207607949828126/KongzDAObySolKongzV2.png?ex=6599af91&is=65873a91&hm=7b1949b9bd160b7efb628e0e841855f589e04a8b6318ceb32ce93318174c2c91&' className='w-full' />
+      <img src='/img/KongzDAObySolKongzV2-noBG.png' className='w-full' />
       {/* --------------------------------- Body ----------------------------------- */}      
 
       <div className='w-full flex flex-col justify-between items-center gap-20'>
@@ -68,7 +68,7 @@ export default function Home() {
           <p>Our main vision with KongzDAO goes beyond just creating NFTs — we plan to introduce a transformative element to the SolKongz ecosystem, a catalyst in a self-sustaining universe where each exchange subtly contributes to the vitality and growth of our community. Interwoven with a unique mechanism, this  plays a pivotal role in nurturing the network and offering rewards to those embarking on this journey with us.</p>
           <p>{`Our approach isn't solely about creating value; it's also about fostering a prosperity within ‘The Jungle’.As we embark on this journey together, we want to reaffirm our community values of crypto culture, brotherhood, and having a blast while pursuing financial gains. These principles have been the bedrock of SolKongz, and they will continue to guide us into this new era of the Kongz.
           Our next plan of action will be dropped shortly.And we kinda forgot we to mention... we airdropped 268 WL tokens to all the OGs that participated in the snapshot. Check your wallets and thank you for your loyalty.
-          Kongz Team`}</p>
+          Kongz Team`}</p>  
         </div>
         <div className='w-4/5 border-1 border-[6px] border-borderYellow rounded-[10px] p-[20px] md:p-[30px] flex flex-col items-center gap-4 text-white'>
           <div className='text-[38px] shadow' >RARITY</div>
@@ -116,17 +116,17 @@ export default function Home() {
         </div>
         <p className='text-[38px] text-borderYellow shadow'>1/1 Legendary Kongz</p>
         
-        <Carousel show={2} slide={1} transition={0.5} swiping={true} useArrowKeys={true} leftArrow={<div className=' items-center justify-center cursor-pointer h-full w-[20px] md:w-[200px] flex rotate-180'>
+        <Carousel show={2} slide={1} transition={0.5} swiping={true} useArrowKeys={true} leftArrow={<div className=' items-center justify-center cursor-pointer h-full w-[20px] md:w-[150px] flex rotate-180'>
           <FaAngleRight className='text-white text-title' />
-        </div>} rightArrow={<div className=' items-center justify-center cursor-pointer h-full w-[20px] md:w-[200px] flex rotate-180'>
+        </div>} rightArrow={<div className=' items-center justify-center cursor-pointer h-full w-[20px] md:w-[150px] flex rotate-180'>
           <FaAngleLeft className='text-white text-title' />
         </div>} className='h-[200px] md:h-[600px]'>
           {
             assets.map((val, index) => {
-              return <div key = {val.url + index} className='relative w-[160px] sm:w-[500px]'>
-                <img src={val.url} alt="" className=' w-[160px] sm:w-[500px]  rounded-[15px] border-8 border-borderYellow pink_shadow' />
+              return <div key = {val.url + index} className='relative w-[160px] sm:w-5/6'>
+                <img src={val.url} alt="" className=' w-[160px] sm:w-full  rounded-[15px] border-8 border-borderYellow pink_shadow' />
                 <div className='absolute w-full flex justify-center items-center bottom-[-25px]'>
-                  <Link href={`/pages/dashboard/mint/${index}`}><button className=' pink_shadow text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-content sm:text-[38px]'>{val.title}</button></Link>
+                  <button className=' pink_shadow text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-content sm:text-[38px]'>{val.title}</button>
 
                 </div>
               </div>
@@ -142,7 +142,7 @@ export default function Home() {
         <div className='flex flex-col md:flex-row justify-between w-full p-2 gap-5'>
           <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between items-center'>
             <div className='relative dashoboard__teamimg'>
-              <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f04be8054138_KERFASKEN.png'className='box_shadow border-[3px] border-borderYellow' />
+              <img src='/img/team/kef.gif'className='box_shadow border-[3px] border-borderYellow' />
               <p className=' box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>KEFARSKEN</p>
             </div>
             <p className='text-content text-white p-1 md:p-8 '>{`Hi I'm kefarsken and I am an OG member of the SolKongz community. I'm here to guide the KONGZ on the journey through the Solana Jungle.`}</p>
@@ -150,7 +150,7 @@ export default function Home() {
           </div>
           <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between items-center'>
             <div className='relative dashoboard__teamimg'>
-              <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f01749054127_kFBsN2DoXnpuTJUEZB-t7nY0aHAqvDFIihlEQp0SREA.png'className='box_shadow border-[3px] border-borderYellow' />
+              <img src='/img/team/nate.gif'className='box_shadow border-[3px] border-borderYellow' />
               <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>NATE</p>
             </div>
             <p className='text-content text-white p-1 md:p-8 '>{`Yo its Nate the degenerate jpeg collector from Manchester, England. I like to create things but most importantly,
@@ -159,8 +159,8 @@ export default function Home() {
             
           </div>
           <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between items-center'>
-            <div className='relative dashoboard__teamimg w-full'>
-              <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/65538a4a6913d3aab0b9afe3_teaserv1.png'className='box_shadow border-[3px] border-borderYellow w-full' />
+            <div className='relative dashoboard__teamimg'>
+              <img src='/img/team/cutrab.gif'className='box_shadow border-[3px] border-borderYellow' />
               <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>???</p>
             </div>
             <p className='text-content text-white p-1 md:p-8 '>We are currently looking for a fulltime RUST developer to work on the project and help us build our dreams. Could this be you? If so please contact the team ASAP.</p>
@@ -169,7 +169,7 @@ export default function Home() {
           </div>
         </div>
         <div className='w-full sm:w-2/3'>
-          <p className='text-[38px] text-borderYellow shadow pl-2'>FAQ</p>
+          <p className='text-[45px] text-borderYellow shadow pl-2'>FAQ</p>
 
           <Accordion
             showDivider={false}
@@ -180,23 +180,26 @@ export default function Home() {
             <AccordionItem
               key="1"
               aria-label="how can i join solkongz"
-              title={<p className='text-borderYellow text-content sm:text-title w-full'>HOW CAN I JOIN SOLKONGZ</p>}
+              title="HOW CAN I JOIN SOLKONGZ"
               indicator={({ isOpen }) => (isOpen ? <FaMinus /> : <FaPlus />)}
+              className='border-b-4 border-[#09364A]'
             >
               <p className='text-content text-white '>You can acquire a SOLKONG either through secondary marketplaces like <Link href="https://magiceden.io/marketplace/solkongz" className='text-borderYellow underline' >Magic Eden</Link> , <Link href = "https://solsea.io/c/620fd1cc5f38c6260eb65ca1" className='text-borderYellow underline'>OpenSea</Link>  and SolSea OR you can apply to our <Link href="/pages/dashboard/contact" className='text-borderYellow underline'>Scholarship program</Link> . You might even get lucky in one of our giveaways </p>
             </AccordionItem>
             <AccordionItem
               key="2"
               aria-label="how can i join solkongz"
-              title={<p className='text-borderYellow text-content sm:text-title w-full'>WHAT IS THE TREEHOUSE</p>}
+              title="WHAT IS THE TREEHOUSE"
               indicator={({ isOpen }) => (isOpen ? <FaMinus /> : <FaPlus />)}
+              className='border-b-4 border-[#09364A]'
+
             >
               <p className='text-content text-white '>The Treehouse is an exclusive corner of the Jungle where all of the SOLKONGZ gather to socialize and share their knowledge/creations. The KONGZ are a solid tribe of gorillas that take care of one another to provide a safe-haven to grow within the mysterious Solana Jungle. This will also serve as a platform we can expand and add utility to in the future.</p>
             </AccordionItem>
             <AccordionItem
               key="3"
               aria-label="how can i join solkongz"
-              title={<p className='text-borderYellow text-content sm:text-title w-full'>{`WHAT'S NEXT`}</p>}
+              title="WHAT'S NEXT"
               indicator={({ isOpen }) => (isOpen ? <FaMinus /> : <FaPlus />)}
             >
               <p className='text-content text-white '>Keep an eye on our <Link href="https://twitter.com/SolKongz" className='text-borderYellow underline'>Twitter</Link> . We will be releasing more updates very soon.</p>

@@ -285,7 +285,7 @@ export default function Home() {
                     <FaAlignJustify className="w-[16px] h-[16px]" />
                 </div>
                 {isOpen && (
-                    <div className='absolute w-full bg-[#000] top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
+                    <div className='absolute w-full bg-[#000] top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4 z-20'>
                         <div className='w-full flex justify-center'>
                             <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
                         </div>
@@ -300,8 +300,8 @@ export default function Home() {
         {/* --------------------------------- Body ----------------------------------- */}
 
         <div className='w-full flex flex-col justify-between items-center gap-20 pb-14'>
-            <div className='w-full md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4'>
-                <div className='text-title text-white text-center gap-6 w-full'><span>SOLKONGZ</span> - HL TOKEN <span className = "text-borderYellow">#1/5000</span><span className='text-title' > {MINT_STATES[mintState].solPrice} SOL</span></div>
+            <div className='w-5/6 md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4 mt-8'>
+                <div className='text-title text-white text-center gap-6 w-full'>SOLKONGZ - HL TOKEN <span className = "text-borderYellow">#1/5000</span><span className='text-title' > {MINT_STATES[mintState].solPrice} SOL</span></div>
                 {soldOut == true &&
                     <div className='w-full text-center font-extrabold text-[80px] text-amber-800 md2:text-[60px]' >
                         Sold Out
@@ -310,7 +310,7 @@ export default function Home() {
                 {soldOut == false && 
                     <div>
                         <div className = "relative">
-                            <img src = {assets[1].url} alt="no image" className = "w-[550px] z-10" />
+                            <img src = "/img/SolKongzWLToken50.gif" alt="no image" className = "w-[550px] z-10" />
                             <div className='w-full absolute bottom-[-20px] flex items-center justify-center'>
                                 <button className = "text-[38px] text-borderYellow border-[0.5rem] border-b-[#111] border-r-[#111]  bg-bgColor rounded-full px-4" onClick={() => onMint()}>{mintState != "NOT_STARTED" ? "Mint" : "Comming Soon"}</button>
                             </div>
