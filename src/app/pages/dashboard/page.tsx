@@ -30,7 +30,7 @@ export default function Home() {
           <div className='hidden md:flex justify-between gap-6 text-white text-content'>
             <Link href = "dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
             <Link href = "dashboard/shop" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
-            <Link href = "https://t.co/I52MPobQbV" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
+            <Link href = "https://twitter.com/solkongz" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
             <Link href = "https://discord.gg/hrQX37Cs" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Discord</Link>
           </div>
           <div
@@ -43,7 +43,7 @@ export default function Home() {
             <div className='absolute w-full bg-bgColor top-[4.6rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
               <Link href="dashboard/kongzdao"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
               <Link href="dashboard/shop"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
-              <Link href="https://t.co/I52MPobQbV" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
+              <Link href="https://twitter.com/solkongz" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
               <Link href="https://discord.gg/hrQX37Cs" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Discord</Link>
             </div>
           )}
@@ -54,7 +54,7 @@ export default function Home() {
       {/* --------------------------------- Body ----------------------------------- */}      
 
       <div className='w-full flex flex-col justify-between items-center gap-20'>
-        <p className='text-white text-content text-center'>{`The SOLKONGZ are a collection of 2,222 NFTs that grant the holder exclusive access to 'The Jungle' and the strong community of degenerates that call it home.`}</p>
+        <p className='text-white text-content text-center px-2'>{`The SOLKONGZ is a collection of 2,222 NFTs that grant the holder exclusive access to 'The Jungle' and the strong community of degenerates that call it home.`}</p>
         <p className='text-borderYellow text-title text-center'>CHECK OUT THE <Link href='https://www.solkongz.net/kongzdao' className='text-white underline'>KONGZ DAO</Link>  PAGE FOR THE LATEST UPDATES ON THE PROJECT!</p>
         <div className='w-4/5 md:w-2/3 border-1 border-[1px] border-white rounded-[10px] border-dotted p-[25px] md:p-[50px] flex flex-col gap-6 text-white text-content'>
           <p>Dear Kongz</p>
@@ -77,13 +77,13 @@ export default function Home() {
             <div className='flex flex-col gap-2 w-full md:w-1/2'>
               <p className='text-title'>Type</p>
               <table>
-                <tbody className='leading-8'>
+                <tbody className='leading-8 border-spacing-2'>
                     <tr className="odd:bg-darkYellow">
-                      <td>2,222</td>
+                      <td className='w-1/2'>2,222</td>
                       <td>Total SolKongz</td>
                     </tr>
                     <tr className="odd:bg-darkYellow">
-                      <td>18</td>
+                      <td className='w-1/2'>18</td>
                       <td>1/1 Legandary Kongz</td>
                     </tr>
                 </tbody>
@@ -94,20 +94,20 @@ export default function Home() {
               <table>
                 <tbody className='leading-8'>
                     <tr className="odd:bg-darkYellow">
-                      <td>2,222</td>
-                      <td>Total SolKongz</td>
+                      <td className='w-1/2'>Fur Color</td>
+                      <td>Head Traits</td>
                     </tr>
                     <tr className="odd:bg-darkYellow">
-                      <td>18</td> 
-                      <td>1/1 Legandary Kongz</td>
+                      <td className='w-1/2'>Eye Traits</td> 
+                      <td>Mouth Traits</td>
                     </tr>
                     <tr className="odd:bg-darkYellow">
-                      <td>18</td>
-                      <td>1/1 Legandary Kongz</td>
+                      <td className='w-1/2'>21</td>
+                      <td>Torso Traits</td>
                     </tr>
                     <tr className="odd:bg-darkYellow">
-                      <td>18</td>
-                      <td>1/1 Legandary Kongz</td>
+                      <td className='w-1/2'>Torso Traits</td>
+                      <td>Background</td>
                     </tr>
                 </tbody>
               </table>
@@ -161,7 +161,7 @@ export default function Home() {
           <div className='flex flex-col gap-4 w-full md:w-1/3 xl:h-[850px] justify-between items-center'>
             <div className='relative dashoboard__teamimg'>
               <img src='/img/team/cutrab.gif'className='box_shadow border-[3px] border-borderYellow' />
-              <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>???</p>
+              <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>Cutrab</p>
             </div>
             <p className='text-content text-white p-1 md:p-8 '>We are currently looking for a fulltime RUST developer to work on the project and help us build our dreams. Could this be you? If so please contact the team ASAP.</p>
             <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Esolkongz&region=follow_link&screen_name=solkongz" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center flex justify-center items-center w-1/2"><FaXTwitter/> FOLLOW SolKongz</Link>
@@ -208,8 +208,8 @@ export default function Home() {
         </div>
         <div className='flex flex-col justify-center items-center gap-1 py-6'>
           <ScholashipBtn content = "JOIN THE GANG" url = "https://magiceden.io/marketplace/solkongz"/>
-          <Link href="http://creativecommons.org/publicdomain/zero/1.0/"><img src='https://licensebuttons.net/p/zero/1.0/88x31.png' /></Link>
-          <p className='text-white/55'>To the extent possible under law, The SolKongz Team has waived all copyright and related or neighboring rights to SolKongz.</p>
+          <Link href="http://creativecommons.org/publicdomain/zero/1.0/" className='mt-6'><img src='https://licensebuttons.net/p/zero/1.0/88x31.png' /></Link>
+          <p className='text-[#555] mb-5'>To the extent possible under law, The SolKongz Team has waived all copyright and related or neighboring rights to SolKongz.</p>
         </div>
       </div>
       {/* --------------------------------- Body End-------------------------------- */}   

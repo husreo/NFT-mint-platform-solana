@@ -8,9 +8,9 @@ import assets from '../../../util/images';
 import {
 	WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
-import { useRef } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber"
+import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { OrbitControls, useGLTF, Environment } from "@react-three/drei"
+
 // import { Mesh } from "three";
 // const Model = () => {
 //     // location of the 3D model
@@ -25,6 +25,10 @@ import { OrbitControls, useGLTF, Environment } from "@react-three/drei"
 //     );
 // };
 function MeshComponent() {
+    useThree(({camera}) => {
+        camera.position.x = 6;
+        camera.lookAt(0, 0, 0);
+    });
     const gltf = useGLTF("/img/3Dhoodiev3.glb");
   
     return (
@@ -32,10 +36,9 @@ function MeshComponent() {
         <primitive object={gltf.scene} />
       </>
     );
-  }
+}
 export default function Home() {
     const [isOpen, setOpen] = useState(false);
-
     return (
         <div className='w-full bg-bgColor font-ShPinscher'>
         {/* --------------------------------- Header --------------------------------- */}
@@ -50,7 +53,7 @@ export default function Home() {
                     
                     <div className='hidden md:flex justify-between gap-6 text-white text-content'>
                         <Link href = "/pages/dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
-                        <Link href = "https://t.co/I52MPobQbV" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
+                        <Link href = "https://twitter.com/solkongz" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
                         <Link href = "https://discord.gg/hrQX37Cs" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Discord</Link>
                     </div>
                     <div
@@ -65,7 +68,7 @@ export default function Home() {
                                 <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
                             </div>
                             <Link href="/pages/dashboard/kongzdao"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
-                            <Link href="https://t.co/I52MPobQbV" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
+                            <Link href="https://twitter.com/solkongz" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
                             <Link href="https://discord.gg/hrQX37Cs" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Discord</Link>
                         </div>
                     )}
@@ -74,18 +77,25 @@ export default function Home() {
             {/* --------------------------------- Header End ----------------------------- */}
             {/* --------------------------------- Body ----------------------------------- */}
 
-            <div className='w-full flex flex-col justify-center items-center gap-20 pb-14 mt-12'>
-                <p className='text-title text-borderYellow'> SOLKONGZ OG HOODIE</p>
-                <p className='text-title text-white'> 1 $SOL EACH</p>
-                <div className='flex justify-center items-center h-screen w-2/3'>
-                    <Canvas className='h-full w-full'>
-                        <OrbitControls />
-                        <ambientLight />
-                        <pointLight position={[10, 10, 10]} />
-                        <MeshComponent />
-                        <Environment preset="city" />
-                    </Canvas>
+            <div className='w-full flex justify-center items-center gap-20 pb-14 mt-12'>
+                <div className='w-2/3 flex'>
+                    <div className='flex flex-col'>
+                        <p className='text-title text-borderYellow'> SOLKONGZ OG HOODIE</p>
+                        <p className='text-title text-white'> 1 $SOL EACH</p>
+                    </div>
+                    
+                    <div className='flex justify-center items-center h-screen w-1/2'>
+                        <Canvas className='h-full w-full'>
+                            <OrbitControls />
+                            <ambientLight />
+                            <pointLight position={[10, 10, 10]} />
+                            <MeshComponent />
+                            <Environment preset="city" />
+                        </Canvas>
+                        
+                    </div>
                 </div>
+                
             </div>
             {/* --------------------------------- Body End-------------------------------- */}   
         </div>
