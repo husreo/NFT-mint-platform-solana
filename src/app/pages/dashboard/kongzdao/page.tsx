@@ -6,7 +6,9 @@ import Countdown from '../../../component/CountDown';
 import { MINT_STATES, OG_TOKEN, WL_TOKEN } from '../../../util/config';
 import { errorAlert, infoAlert, successAlert } from '../../../component/ToastGroup';
 import { getAtaForMint } from '../../../util/misc';
-import { BsDash, BsPlusLg } from 'react-icons/bs'
+import { BsDash, BsPlusLg } from 'react-icons/bs';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 import Link from 'next/link'
 import { FaAlignJustify, FaHouse, FaPlus, FaMinus } from "react-icons/fa6";
@@ -53,6 +55,7 @@ export default function Home() {
   const [itemsAvailable, setItemsAvailable] = useState(0);
   const [itemsMinted, setItemsMinted] = useState(0);
   const [soldOut, setSoldOut] = useState(false);
+  const percentage = 66;
 
   const incrementValue = (e: boolean) => {
     let newNumber = 0
@@ -301,7 +304,7 @@ export default function Home() {
 
         <div className='w-full flex flex-col justify-between items-center gap-20 pb-14'>
             <div className='w-5/6 md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4 mt-8'>
-                <div className='text-title text-white text-center gap-6 w-full'>SOLKONGZ - HL TOKEN <span className = "text-borderYellow">#1/5000</span><span className='text-title' > {MINT_STATES[mintState].solPrice} SOL</span></div>
+                <div className='text-title text-white text-center gap-6 w-full'>KongzDAO <span className = "text-borderYellow">#{itemsMinted}/{itemsAvailable}</span></div>
                 {soldOut == true &&
                     <div className='w-full text-center font-extrabold text-[80px] text-amber-800 md2:text-[60px]' >
                         Sold Out
@@ -311,8 +314,21 @@ export default function Home() {
                     <div>
                         <div className = "relative">
                             <img src = "/img/SolKongzWLToken50.gif" alt="no image" className = "w-[550px] z-10" />
-                            <div className='w-full absolute bottom-[-20px] flex items-center justify-center'>
-                                <button className = "text-[38px] text-borderYellow border-[0.5rem] border-b-[#111] border-r-[#111]  bg-bgColor rounded-full px-4" onClick={() => onMint()}>{mintState != "NOT_STARTED" ? "Mint" : "Comming Soon"}</button>
+                            <div className='w-full absolute bottom-[-30px] flex items-center justify-center' onClick={() => onMint()}>
+                                {mintState != "NOT_STARTED" && mintState != "ENDED" && (
+                                  <div className='w-[100px] cursor-pointer rounded-full'>
+                                    <CircularProgressbar value={itemsMinted/itemsAvailable*100} text="Mint" strokeWidth = {11} styles={
+                                      buildStyles({
+                                        textSize: '35px',
+                                        backgroundColor: "#0E263C",
+                                        textColor: '#FFAB24',
+                                        pathColor: "#111"
+                                      })
+                                    }  background/>
+                                  </div>
+                                )}
+                                
+
                             </div>
                         </div>
                         <Countdown nextTime={mintState == "ENDED" ? null : nextTime} mintState={mintState} refresh={refreshCandyMachineState} />
@@ -354,9 +370,9 @@ export default function Home() {
                         )}
                     </div>
                 }
-                <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: 2000 $PELL - 1x SOLKONGZ</p>
+
+                <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: {MINT_STATES[mintState].solPrice} SOL - 1x SOLKONGZ</p>
                 <p className = "text-white text-title text-center" >This WL Token grants the holder access to the newly discovered Jungle Orphanage, and the chance to adopt their very own BabyKong</p>
-                <p className = "text-white text-title text-center" >Total minted: {itemsMinted} / {itemsAvailable}</p>
             </div>
             <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/65538cbacb0d5c7a11b62978_Screenshot%202023-11-14%20150417.png' alt='no imgage' />
             <div className='flex w-full gap-8'>

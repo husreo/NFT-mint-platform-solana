@@ -8,14 +8,14 @@ const Countdown = ({ nextTime, mintState, refresh }) => {
         return (
             <>
                 {nextTime == null ? (
-                    <div className="mt-5 text-2xl font-extrabold text-amber-900 md:text-3xl animate-bounce">
+                    <div className="mt-5 text-2xl font-extrabold text-white md:text-3xl animate-bounce">
                         Mint Ended
                     </div>
                 ) : (
                     <div className="w-full flex flex-col items-center">
-                        <h1 className="text-xl text-white mt-5">{mintText}</h1>
-                        <div className="mt-5 text-2xl font-extrabold text-amber-900 md:text-3xl animate-bounce">
-                            <span>{days} D</span>: <span>{hours} H</span>: <span>{minutes} M</span>: <span>{seconds} S</span>
+                        <h1 className="text-xl text-white mt-8">{mintText}</h1>
+                        <div className="mt-5 text-2xl font-extrabold text-white md:text-3xl animate-bounce">
+                            <span>{days} D</span>: <span>{hours} H</span>: <span>{minutes} M</span>: {seconds}<span className="text-amber-900"> S</span>
                         </div>
                     </div>
                 )}

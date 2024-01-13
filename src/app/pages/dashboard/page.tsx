@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import {Accordion, AccordionItem} from "@nextui-org/react";
 import { Carousel } from '@trendyol-js/react-carousel';
 
-
 export default function Home() {
   const [isOpen, setOpen] = useState(false);
   // const router = useRouter();
