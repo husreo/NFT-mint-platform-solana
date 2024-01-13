@@ -135,7 +135,7 @@ export default function Home() {
         </Carousel>
         <div className='w-full relative overflow-hidden'>
           <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f04f39054152_unknown-p-2000.png' width={100} height={70} className='w-full' alt='noimage'></img>
-          <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f0848e054151_unkno5668wn-p-500.png' className='bottom-9 right-0 md:right-[-5rem] absolute border-[6px] border-white rounded-xl w-1/2 md:w-1/3 lg:w-1/4 box_shadow' />
+          <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f0848e054151_unkno5668wn-p-500.png' className='bottom-9 right-0 md:right-5 absolute border-[6px] border-white rounded-xl w-1/2 md:w-1/3 lg:w-1/4 box_shadow' />
         </div>
         <p className='text-[38px] text-borderYellow shadow'>MEET THE NEW TEAM</p>
         <div className='flex flex-col md:flex-row justify-between w-full p-2 gap-5'>
