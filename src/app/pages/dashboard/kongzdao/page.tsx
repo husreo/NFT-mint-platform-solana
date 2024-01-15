@@ -302,7 +302,7 @@ export default function Home() {
         {/* --------------------------------- Header End ----------------------------- */}
         {/* --------------------------------- Body ----------------------------------- */}
 
-        <div className='w-full flex flex-col justify-between items-center gap-20 pb-14'>
+        <div className='w-full flex flex-col justify-between items-center gap-15 pb-14'>
             <div className='w-5/6 md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4 mt-8'>
                 <div className='text-title text-white text-center gap-6 w-full'>KongzDAO <span className = "text-borderYellow">#{itemsMinted}/{itemsAvailable}</span></div>
                 {soldOut == true &&
@@ -327,8 +327,7 @@ export default function Home() {
                                     }  background/>
                                   </div>
                                 )}
-                                
-
+                              
                             </div>
                         </div>
                         <Countdown nextTime={mintState == "ENDED" ? null : nextTime} mintState={mintState} refresh={refreshCandyMachineState} />
@@ -375,6 +374,7 @@ export default function Home() {
                 <p className = "text-white text-title text-center" >This WL Token grants the holder access to the newly discovered Jungle Orphanage, and the chance to adopt their very own BabyKong</p>
             </div>
             <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/65538cbacb0d5c7a11b62978_Screenshot%202023-11-14%20150417.png' alt='no imgage' />
+            <img src='/img/KongzDAOSUBBER1280black.png' alt='no imgage' />
             <div className='flex w-full gap-8'>
                 <div className='flex flex-col w-1/2'>
                     <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/652d2cd90269ade5118a64b2_Screenshot%202023-09-27%20195616.png' />
