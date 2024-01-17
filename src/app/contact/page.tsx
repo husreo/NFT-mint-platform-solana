@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import ScholashipBtn from '../../../component/ScholashipBtn'
+import ScholashipBtn from '../component/ScholashipBtn'
 import Link from 'next/link'
 import { FaAlignJustify, FaHouse, FaPlus, FaMinus } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
@@ -14,10 +14,10 @@ export default function Home() {
       {/* --------------------------------- Header --------------------------------- */}
       <div className='w-full flex flex-col justify-center items-center relative'>
         <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
-          <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/pages/dashboard" />
+          <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/" />
           <div className='hidden md:flex justify-between gap-6 text-white text-content'>
-            <Link href = "/pages/dashboard/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
-            <Link href = "/pages/dashboard/shop" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
+            <Link href = "/kongzdao" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Kongz Dao</Link>
+            <Link href = "/shop" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Shop</Link>
             <Link href = "https://twitter.com/solkongz" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Twitter</Link>
             <Link href = "https://discord.gg/hrQX37Cs" className='hover:border-b-4 hover:border-darkYello pb-1 duration-200'>Discord</Link>
           </div>
@@ -29,8 +29,8 @@ export default function Home() {
           </div>
           {isOpen && (
             <div className='absolute w-full bg-bgColor top-[5rem] left-0 p-4 text-white flex md:hidden flex-col gap-4'>
-              <Link href="/pages/dashboard/kongzdao"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
-              <Link href="/pages/dashboard/shop"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
+              <Link href="/kongzdao"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Kongz Dao</Link>
+              <Link href="/shop"className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Shop</Link>
               <Link href="https://twitter.com/solkongz" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Twitter</Link>
               <Link href="https://discord.gg/hrQX37Cs" className='w-full Kongz Dao text-center hover:bg-[#907848] duration-300'>Discord</Link>
             </div>

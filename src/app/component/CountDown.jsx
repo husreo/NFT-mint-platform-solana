@@ -27,7 +27,7 @@ const Countdown = ({ nextTime, mintState, refresh }) => {
         if (mintState === "OG") setMintText("OG mint ends in :");
         else if (mintState === "NOT_STARTED") setMintText("OG mint starts in :");
         else if (mintState === "WL") setMintText("WL mint ends in:");
-        else if (mintState === "PUBLIC") setMintText("Public mint ends in:");
+        else if (mintState === "PUBLIC") setMintText("Public mint");
 
     }, [mintState])
 
