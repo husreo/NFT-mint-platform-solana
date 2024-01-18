@@ -142,25 +142,25 @@ export default function Home() {
           <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f0848e054151_unkno5668wn-p-500.png' className='bottom-0 md:bottom-9 right-0 md:right-5 absolute border-[6px] border-white rounded-xl w-1/3 lg:w-1/4 box_shadow' />
         </div>
         <p className='text-[38px] text-borderYellow text_shadow'>MEET THE NEW TEAM</p>
-        <div className='flex flex-col md:flex-row justify-between w-full p-2 gap-5'>
-          <div className='flex flex-col gap-10 w-full md:w-1/3 justify-between items-center'>
+        <div className='flex flex-col md:flex-row justify-around w-full p-2 gap-5'>
+          <div className='flex flex-col gap-10 w-full md:w-1/4 justify-between items-center'>
             <div className='relative dashoboard__teamimg'>
               <img src='/img/team/kef.gif' className='box_shadow border-[3px] border-borderYellow' />
               <p className=' box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>KEFARSKEN</p>
             </div>
             <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Ekefarsken&region=follow_link&screen_name=kefarsken" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center flex justify-center items-center w-1/2"><FaXTwitter /> FOLLOW KEFARSKEN</Link>
           </div>
-          <div className='flex flex-col gap-10 w-full md:w-1/3 justify-between items-center'>
+          <div className='flex flex-col gap-10 w-full md:w-1/4 justify-between items-center'>
             <div className='relative dashoboard__teamimg'>
               <img src='/img/team/nate.gif' className='box_shadow border-[3px] border-borderYellow' />
-              <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>NATE</p>
+              <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.0rem)]'>NATE</p>
             </div>
             <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Ec0gnate&region=follow_link&screen_name=c0gnate" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center flex justify-center items-center w-1/2"><FaXTwitter /> FOLLOW Nate</Link>
           </div>
-          <div className='flex flex-col gap-10 w-full md:w-1/3 justify-between items-center'>
+          <div className='flex flex-col gap-10 w-full md:w-1/4 justify-between items-center'>
             <div className='relative dashoboard__teamimg'>
               <img src='/img/team/cutrab.gif' className='box_shadow border-[3px] border-borderYellow' />
-              <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.8rem)]'>Cutrab</p>
+              <p className='box_shadow text-white text-content absolute border-[1px] border-borderYellow bottom-[-1rem] bg-bgColor p-2 left-[calc(50%-2.0rem)]'>Cutrab</p>
             </div>
             <Link href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.solkongz.net%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Esolkongz&region=follow_link&screen_name=solkongz" className="h-8 duration-300 text-borderYellow border-[1px] border-borderYellow rounded-[10px] px-3 py-1 hover:bg-[#907848] hover:text-[#132a3b] text-center flex justify-center items-center w-1/2"><FaXTwitter /> FOLLOW SolKongz</Link>
           </div>

@@ -28,9 +28,7 @@ export default function DashboardLayout({
         <WalletProvider wallets={[wallet]} autoConnect>
           <WalletModalProvider>
               <ToastContainer/> 
-              <html lang="en">
-                <body>{children}</body>
-              </html>
+                {children}
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

@@ -35,7 +35,7 @@ import { Keypair, Transaction } from '@solana/web3.js';
 type wallet = AnchorWallet | undefined;
 
 const candyMachineId =
-  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "71TofHCQhck3DzEq3mg363nGEAGjrxTdd7JYLyvq8ftD";
+  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "LhCKc2H55p6YYaVxCk9Yi6hXVbmn3iQFFLRL25DMXXT";
 
 export default function Home() {
 
@@ -270,7 +270,7 @@ export default function Home() {
         <div className='w-full flex flex-col justify-center items-center relative'>
             <div className='w-5/6 flex justify-between mt-8 h-[40px]'>
                 <div className='flex gap-2'>
-                    <ScholashipBtn content = "BACK TO THE JUNGLE" url = "http://localhost:3000" />
+                    <ScholashipBtn content = "BACK TO THE JUNGLE" url = "/" />
                     <div className='hidden md:flex'>
                         <WalletMultiButton style={{color: '#FFAB24', height: "32px", border: "1px solid #FFAB24", borderRadius: "10px", backgroundColor: "transparent", fontSize: '15px', fontFamily: "SHPinscher, sans-serif'"}} />
                     </div>
@@ -303,75 +303,77 @@ export default function Home() {
         {/* --------------------------------- Body ----------------------------------- */}
 
         <div className='w-full flex flex-col justify-between items-center gap-15 pb-14'>
-            <div className='w-5/6 md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4 mt-8'>
-                <div className='text-title text-white text-center gap-6 w-full'>KongzDAO <span className = "text-borderYellow">#{itemsMinted}/{itemsAvailable}</span></div>
+            <div className='w-5/6 md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4 pb-8 mt-8'>
+                {/* <div className='text-title text-white text-center gap-6 w-full'>KongzDAO <span className = "text-borderYellow">#{itemsMinted}/{itemsAvailable}</span></div> */}
                 {soldOut == true &&
                     <div className='w-full text-center font-extrabold text-[80px] text-amber-800 md2:text-[60px]' >
                         Sold Out
                     </div>
                 }
-                {soldOut == false && 
-                    <div>
-                        <div className = "relative">
-                            <img src = "/img/SolKongzWLToken50.gif" alt="no image" className = "w-[550px] z-10" />
-                            <div className='w-full absolute bottom-[-30px] flex items-center justify-center' onClick={() => onMint()}>
-                                {mintState != "NOT_STARTED" && mintState != "ENDED" && (
-                                  <div className='w-[100px] cursor-pointer rounded-full'>
-                                    <CircularProgressbar value={itemsMinted/itemsAvailable*100} text="Mint" strokeWidth = {11} styles={
-                                      buildStyles({
-                                        textSize: '35px',
-                                        backgroundColor: "#0E263C",
-                                        textColor: '#FFAB24',
-                                        pathColor: "#111"
-                                      })
-                                    }  background/>
-                                  </div>
-                                )}
-                              
-                            </div>
+                <div className = "relative">
+                  <img src = "/img/SolKongzWLToken50.gif" alt="no image" className = "w-[550px] z-10" />
+                  {soldOut == false && 
+                    <div className='w-full absolute bottom-[-30px] flex items-center justify-center' onClick={() => onMint()}>
+                      {mintState != "NOT_STARTED" && mintState != "ENDED" ? (
+                        <div className='w-[100px] cursor-pointer rounded-full'>
+                          <CircularProgressbar value={itemsMinted/itemsAvailable*100} text="Mint" strokeWidth = {11} styles={
+                            buildStyles({
+                              textSize: '35px',
+                              backgroundColor: "#0E263C",
+                              textColor: '#FFAB24',
+                              pathColor: "#111"
+                            })
+                          }  background/>
                         </div>
-                        <Countdown nextTime={mintState == "ENDED" ? null : nextTime} mintState={mintState} refresh={refreshCandyMachineState} />
-                        {mintState != "NOT_STARTED" && mintState != "ENDED" && (
-                            <div className='flex flex-col items-center justify-center w-full h-full gap-6'>
-                                <div className='flex flex-row items-center justify-between w-full h-full px-3 text-white md2:px-10' >
-                                    <div
-                                        onClick={() => incrementValue(false)}
-                                        className={`${numberValue < 2
-                                        ? 'cursor-not-allowed'
-                                        : 'cursor-pointer'
-                                        } w-[60px] h-[60px] flex flex-row rounded-full bg-[#10141f] items-center justify-center hover:bg-[#36272b]`
-                                        }
-                                    >
-                                        <BsDash style={{ color: '#ffffff', fontSize: '20px' }} />
-                                    </div>
-                                    <div className='text-[24px] md2:text-[36px] font-bold' >
-                                        {numberValue}
-                                    </div>
-                                    <div
-                                        onClick={() => incrementValue(true)
-                                        }
-                                        className={`${numberValue >= mintLimited
-                                        ? 'cursor-not-allowed'
-                                        : 'cursor-pointer'
-                                        } w-[60px] h-[60px] flex flex-row rounded-full bg-[#10141f] items-center justify-center hover:bg-[#36272b]`}
-                                    >
-                                        <BsPlusLg
-                                        style={{ color: '#ffffff', fontSize: '20px' }}
-                                        />
-                                    </div>
-                                </div>
-                                {
-                                    (mintState == "OG" || mintState == "WL") && (<div className='w-full flex justify-center text-white text-[16px] font-semibold' >
-                                        {mintLimited} Mint per wallet allowed
-                                    </div>)
-                                }
-                            </div>
-                        )}
+                      ): <p className='text-borderYellow text-title py-3 px-4 border-[3px] border-white bg-bgColor rounded-full' >Mint Comming Soon</p>}
                     </div>
+                  }
+                  
+                </div>
+                {soldOut == false && 
+                  <div>
+                      {/* <Countdown nextTime={mintState == "ENDED" ? null : nextTime} mintState={mintState} refresh={refreshCandyMachineState} /> */}
+                      {mintState != "NOT_STARTED" && mintState != "ENDED" && (
+                          <div className='flex flex-col items-center justify-center w-full h-full gap-6'>
+                              <div className='flex flex-row items-center justify-between w-full h-full px-3 text-white md2:px-10' >
+                                  <div
+                                      onClick={() => incrementValue(false)}
+                                      className={`${numberValue < 2
+                                      ? 'cursor-not-allowed'
+                                      : 'cursor-pointer'
+                                      } w-[60px] h-[60px] flex flex-row rounded-full bg-[#10141f] items-center justify-center hover:bg-[#36272b]`
+                                      }
+                                  >
+                                      <BsDash style={{ color: '#ffffff', fontSize: '20px' }} />
+                                  </div>
+                                  <div className='text-[24px] md2:text-[36px] font-bold' >
+                                      {numberValue}
+                                  </div>
+                                  <div
+                                      onClick={() => incrementValue(true)
+                                      }
+                                      className={`${numberValue >= mintLimited
+                                      ? 'cursor-not-allowed'
+                                      : 'cursor-pointer'
+                                      } w-[60px] h-[60px] flex flex-row rounded-full bg-[#10141f] items-center justify-center hover:bg-[#36272b]`}
+                                  >
+                                      <BsPlusLg
+                                      style={{ color: '#ffffff', fontSize: '20px' }}
+                                      />
+                                  </div>
+                              </div>
+                              {
+                                  (mintState == "OG" || mintState == "WL") && (<div className='w-full flex justify-center text-white text-[16px] font-semibold' >
+                                      {mintLimited} Mint per wallet allowed
+                                  </div>)
+                              }
+                              <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: {MINT_STATES[mintState].solPrice} SOL - 1x SOLKONGZ</p>
+                              <p className = "text-white text-title text-center" >This WL Token grants the holder access to the newly discovered Jungle Orphanage, and the chance to adopt their very own BabyKong</p>
+                          </div>
+                      )}
+                  </div>
                 }
 
-                <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: {MINT_STATES[mintState].solPrice} SOL - 1x SOLKONGZ</p>
-                <p className = "text-white text-title text-center" >This WL Token grants the holder access to the newly discovered Jungle Orphanage, and the chance to adopt their very own BabyKong</p>
             </div>
             <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/65538cbacb0d5c7a11b62978_Screenshot%202023-11-14%20150417.png' alt='no imgage' />
             <img src='/img/KongzDAOSUBBER1280black.png' alt='no imgage' />

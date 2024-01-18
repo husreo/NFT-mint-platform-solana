@@ -7,10 +7,10 @@ export const MINT_STATES = {
         solPrice: 0
     },
     "WL": {
-        solPrice: 0.11
+        solPrice: 0.25
     },
     "PUBLIC": {
-        solPrice: 0.22
+        solPrice: 0.5
     },
     "ENDED": {
         solPrice: 0

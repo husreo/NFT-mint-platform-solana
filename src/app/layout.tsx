@@ -1,17 +1,12 @@
 import type { Metadata } from 'next';
-import Head from 'next/head';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Solkongz',
-  description: 'The vision of the project is to allow users to earn by minting.',
-  twitter: {
-    card: 'summary_large_image',
-    title: 'KongzDAO',  
-    description: 'The vision of the project is to allow users to earn by minting.',
-    images: ['/img/The_Jungle_v3xx.png'],
-  },
+  description: 'The vision of the project is to allow users to earn by minting.'
 }
+
+
 
 export default function RootLayout({
   children,
@@ -20,6 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" >
+      
       <body>
         <div className='w-full flex'>
           {children}
