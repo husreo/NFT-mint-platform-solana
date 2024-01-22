@@ -7,7 +7,18 @@ import assets from './util/images';
 import { FaAlignJustify, FaHouse, FaPlus, FaMinus, FaAngleLeft, FaAngleRight, FaXTwitter } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import { Accordion, AccordionItem } from "@nextui-org/react";
-import { Carousel } from '@trendyol-js/react-carousel';
+import { Carousel } from '@trendyol-js/react-carousel'; 
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Pagination,  Keyboard, Navigation, } from 'swiper/modules';
+
 
 export default function Home() {
   const [isOpen, setOpen] = useState(false);
@@ -119,24 +130,36 @@ export default function Home() {
         </div>
         <p className='text-[38px] text-borderYellow text_shadow'>1/1 Legendary Kongz</p>
 
-        <Carousel show={2} slide={1} transition={0.5} swiping={true} useArrowKeys={true} leftArrow={<div className=' items-center justify-center cursor-pointer h-full w-[20px] md:w-[150px] flex rotate-180'>
-          <FaAngleRight className='text-white text-title' />
-        </div>} rightArrow={<div className=' items-center justify-center cursor-pointer h-full w-[20px] md:w-[150px] flex rotate-180'>
-          <FaAngleLeft className='text-white text-title' />
-        </div>} className='h-[200px] sm:h-[370px] md:h-[600px]'>
-          {
-            assets.map((val, index) => {
-              return <div key={val.url + index} className='relative w-[160px] sm:w-5/6'>
-                <img src={val.url} alt="" className=' w-[160px] sm:w-full  rounded-[15px] border-8 border-borderYellow pink_shadow' />
-                <div className='absolute w-full flex justify-center items-center bottom-[-25px]'>
+        
+        <Swiper
+          slidesPerView={2}
+          centeredSlides={false}
+          slidesPerGroupSkip={1}
+          grabCursor={true}
+          keyboard={{
+            enabled: true,
+          }}
+          navigation={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Keyboard, Navigation, Pagination]}
+          className="mySwiper"                   
+      >
+        {
+        assets.map((val, index) => {
+          return <SwiperSlide key={val.url+"1"}>
+            <div className='img_wraper relative'>
+              <img src={val.url} alt="" className='rounded-[15px] border-8 border-borderYellow pink_shadow' />
+              <div className='absolute w-full flex justify-center items-center bottom-[-25px]'>
                   <button className=' pink_shadow text-white rounded-[10px] border-[6px] border-borderYellow px-4 bg-bgColor text-[18px] sm:text-[38px]'>{val.title}</button>
-
-                </div>
               </div>
+            </div>
+          </SwiperSlide>
 
-            })
-          }
-        </Carousel>
+        })
+        }
+      </Swiper>
         <div className='w-full relative overflow-hidden'>
           <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f04f39054152_unknown-p-2000.png' width={100} height={70} className='w-full' alt='noimage'></img>
           <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/6358359a8c87f0848e054151_unkno5668wn-p-500.png' className='bottom-0 md:bottom-9 right-0 md:right-5 absolute border-[6px] border-white rounded-xl w-1/3 lg:w-1/4 box_shadow' />

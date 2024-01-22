@@ -35,7 +35,7 @@ import { Keypair, Transaction } from '@solana/web3.js';
 type wallet = AnchorWallet | undefined;
 
 const candyMachineId =
-  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "LhCKc2H55p6YYaVxCk9Yi6hXVbmn3iQFFLRL25DMXXT";
+  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "7DJNZXcsf8T6s2oaWYCzm1pLSsscPcdJ35SMDrtVHHXL";
 
 export default function Home() {
 
@@ -114,14 +114,16 @@ export default function Home() {
     }
 
     const now = Date.now() / 1000;
-
-    console.log("wallet: ", wallet?.publicKey.toBase58());
+    console.log("now date------------",new Date(now));
+    console.log("sugar date-------------------",new Date(cndy?.candyGuard?.groups[0].guards.startDate?.date.toNumber()) );
+    
+    // console.log("wallet: ", wallet?.publicKey.toBase58());
     if (now < cndy?.candyGuard?.groups[0].guards.startDate?.date.toNumber()) {
       console.log("mint not started");
       setMintState("NOT_STARTED");
       setNextTime(
         new Date(
-          cndy?.candyGuard?.groups[1].guards.startDate?.date.toNumber() * 1000
+          cndy?.candyGuard?.groups[0].guards.startDate?.date.toNumber() * 1000
         )
       );
     } else if (now < cndy?.candyGuard?.groups[1].guards.startDate?.date.toNumber()) {
@@ -129,14 +131,14 @@ export default function Home() {
       setMintState("OG");
       setNextTime(
         new Date(
-          cndy?.candyGuard?.groups[2].guards.startDate?.date.toNumber() * 1000
+          cndy?.candyGuard?.groups[1].guards.startDate?.date.toNumber() * 1000
         )
       );
     } else if (now < cndy?.candyGuard?.groups[2].guards.startDate?.date.toNumber()) {
       console.log("wl mint");
       setMintState("WL");
       setNextTime(
-        new Date(
+        new Date( 
           cndy?.candyGuard?.groups[2].guards.startDate?.date.toNumber() * 1000
         )
       );
@@ -304,8 +306,8 @@ export default function Home() {
 
         <div className='w-full flex flex-col justify-between items-center gap-15 pb-14'>
             <div className='w-5/6 md:w-1/3 border-[6px] ro unded-2xl border-borderYellow bg-bgColor flex flex-col gap-4 items-center p-4 pb-8 mt-8'>
-                {/* <div className='text-title text-white text-center gap-6 w-full'>KongzDAO <span className = "text-borderYellow">#{itemsMinted}/{itemsAvailable}</span></div> */}
-                {soldOut == true &&
+                <div className='text-title text-white text-center gap-6 w-full'>KongzDAO <span className = "text-borderYellow">#{itemsMinted}/{itemsAvailable}</span></div>
+                {soldOut == true && 
                     <div className='w-full text-center font-extrabold text-[80px] text-amber-800 md2:text-[60px]' >
                         Sold Out
                     </div>
@@ -325,14 +327,14 @@ export default function Home() {
                             })
                           }  background/>
                         </div>
-                      ): <p className='text-borderYellow text-title py-3 px-4 border-[3px] border-white bg-bgColor rounded-full' >Mint Comming Soon</p>}
+                      ): <p className='text-borderYellow text-title py-3 px-4 border-[3px] border-white bg-bgColor rounded-full' >Mint Coming Soon</p>}
                     </div>
                   }
                   
                 </div>
                 {soldOut == false && 
                   <div>
-                      {/* <Countdown nextTime={mintState == "ENDED" ? null : nextTime} mintState={mintState} refresh={refreshCandyMachineState} /> */}
+                      <Countdown nextTime ={mintState == "ENDED" ? null : nextTime} mintState={mintState} refresh={refreshCandyMachineState} />
                       {mintState != "NOT_STARTED" && mintState != "ENDED" && (
                           <div className='flex flex-col items-center justify-center w-full h-full gap-6'>
                               <div className='flex flex-row items-center justify-between w-full h-full px-3 text-white md2:px-10' >
