@@ -35,7 +35,7 @@ import { Keypair, Transaction } from '@solana/web3.js';
 type wallet = AnchorWallet | undefined;
 
 const candyMachineId =
-  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "7DJNZXcsf8T6s2oaWYCzm1pLSsscPcdJ35SMDrtVHHXL";
+  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "5kgq9YtMtHcDausk511MMEpL7yot5aip2P9LdTo5EzeT";
 
 export default function Home() {
 
@@ -254,9 +254,9 @@ export default function Home() {
 
       // const mintTxId = (await mintOneToken(candyMachine, wallet.publicKey))[0]
       if (confirmed == 1) {
-        successAlert("Congratulations! Mint a pixelated ape!");
+        successAlert("Welcome to the family Anon");
       } else if (confirmed > 1) {
-        successAlert("Congratulations! Mint pixelated apes!");
+        successAlert("Welcome to the family Anon");
       } else {
         errorAlert("Mint failed! Please try again!");
       }
@@ -333,7 +333,7 @@ export default function Home() {
                   
                 </div>
                 {soldOut == false && 
-                  <div>
+                  <div className='w-full lg:w-2/3'>
                       <Countdown nextTime ={mintState == "ENDED" ? null : nextTime} mintState={mintState} refresh={refreshCandyMachineState} />
                       {mintState != "NOT_STARTED" && mintState != "ENDED" && (
                           <div className='flex flex-col items-center justify-center w-full h-full gap-6'>
@@ -364,13 +364,12 @@ export default function Home() {
                                       />
                                   </div>
                               </div>
-                              {
+                              {/* {
                                   (mintState == "OG" || mintState == "WL") && (<div className='w-full flex justify-center text-white text-[16px] font-semibold' >
                                       {mintLimited} Mint per wallet allowed
                                   </div>)
-                              }
-                              <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: {MINT_STATES[mintState].solPrice} SOL - 1x SOLKONGZ</p>
-                              <p className = "text-white text-title text-center" >This WL Token grants the holder access to the newly discovered Jungle Orphanage, and the chance to adopt their very own BabyKong</p>
+                              } */}
+                              <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: {MINT_STATES[mintState].solPrice} SOL {mintState ==='OG'? ' 1X WL Token':mintState === 'WL'? ' 1X WL Token':''}</p>
                           </div>
                       )}
                   </div>

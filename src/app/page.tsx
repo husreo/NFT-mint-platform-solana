@@ -19,7 +19,6 @@ import 'swiper/css/navigation';
 // import required modules
 import { Pagination,  Keyboard, Navigation, } from 'swiper/modules';
 
-
 export default function Home() {
   const [isOpen, setOpen] = useState(false);
   // const router = useRouter();
