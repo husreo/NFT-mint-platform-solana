@@ -31,11 +31,11 @@ import {
     SolAmount,
     walletAdapterIdentity,
 } from "@metaplex-foundation/js";
-import { Keypair, Transaction } from '@solana/web3.js';
+import { Keypair, Transaction, LAMPORTS_PER_SOL } from '@solana/web3.js';
 type wallet = AnchorWallet | undefined;
 
 const candyMachineId =
-  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "5kgq9YtMtHcDausk511MMEpL7yot5aip2P9LdTo5EzeT";
+  process.env.NEXT_PUBLIC_CANDYMACINE_ID ?? "EgYxF8z229LJR1Y2o4qXC5BeQ6mjYAkQicEVguE46gYx";
 
 export default function Home() {
 
@@ -46,7 +46,6 @@ export default function Home() {
     CandyMachine<DefaultCandyGuardSettings> | undefined
   >(undefined);
   const [numberValue, setNumberValue] = useState<number>(1);
-//   const [mintText, setMintText] = useState<string>('Pixelated Apes'); 
   const [mintLimited, setMintLimited] = useState<number>(0);
 
   const [mintState, setMintState] = useState<keyof typeof MINT_STATES>("NOT_STARTED");
@@ -114,9 +113,6 @@ export default function Home() {
     }
 
     const now = Date.now() / 1000;
-    console.log("now date------------",new Date(now));
-    console.log("sugar date-------------------",new Date(cndy?.candyGuard?.groups[0].guards.startDate?.date.toNumber()) );
-    
     // console.log("wallet: ", wallet?.publicKey.toBase58());
     if (now < cndy?.candyGuard?.groups[0].guards.startDate?.date.toNumber()) {
       console.log("mint not started");
@@ -143,7 +139,6 @@ export default function Home() {
         )
       );
     } else if (now > cndy?.candyGuard?.groups[2].guards.startDate?.date.toNumber()) {
-      console.log("public mint");
       setMintState("PUBLIC");
       setNextTime(
         new Date(
@@ -151,7 +146,6 @@ export default function Home() {
         )
       );
     } else {
-      console.log("mint ended");
       setMintState("ENDED");
       setNextTime(new Date());
     }
@@ -185,6 +179,8 @@ export default function Home() {
 
     if (mintState == "OG" || mintState == "WL") {
       let tBalance = 0;
+      let solBalance = await connection.getBalance(wallet.publicKey);
+
       try {
         tBalance =
           (
@@ -197,14 +193,32 @@ export default function Home() {
       } catch (e) {
         console.log(e);
       }
-
+      
       console.log("token balance: ", tBalance);
-      if (tBalance == 0) {
-        errorAlert(mintState == "OG" ? "You don't have enough OG token" : "You don't have enough WL token");
+      if (mintState == "OG") {
+        if (solBalance/LAMPORTS_PER_SOL <(0.02198*numberValue)) {
+          errorAlert("You don't have enough Sol for");
+          return
+        }
+      }
+      if (tBalance < 1*numberValue) {
+        errorAlert(mintState == "OG" ? "You don't have enough WL1 token" : "You don't have enough WL2 token");
         return;
       }
+      if (mintState == "WL") {
+        if (solBalance/LAMPORTS_PER_SOL <(0.27198*numberValue)) {
+          errorAlert("You don't have enough Sol");
+          return
+        }
+      }
     }
-
+    if (mintState == "PUBLIC") {
+      let solBalance = await connection.getBalance(wallet.publicKey);
+      if (solBalance/LAMPORTS_PER_SOL < (0.52198*numberValue)) {
+        errorAlert("You don't have enough Sol");
+        return
+      }
+    }
     const METAPLEX = Metaplex.make(connection).use(
       walletAdapterIdentity(wallet)
     );
@@ -231,11 +245,10 @@ export default function Home() {
       }
 
       const signedTxs = await wallet.signAllTransactions(transactions);
-
+      
       let confirmed = 0;
 
       try {
-        console.log(signedTxs[0]);
         const signatures = await Promise.all(signedTxs.map((o) => connection.sendRawTransaction(o.serialize())))
 
         infoAlert("Confirming transactions ...");
@@ -247,9 +260,10 @@ export default function Home() {
         }, "confirmed")))
 
         confirmed = confirmations.reduce((val, cur) => cur.value.err === null ? val + 1 : val, 0)
+        
       } catch (e) {
-        console.log("error while send and confirm transaction");
-        console.log(e);
+        errorAlert("Mint failed! Please try again!");
+        // console.log(e);
       }
 
       // const mintTxId = (await mintOneToken(candyMachine, wallet.publicKey))[0]
@@ -342,7 +356,7 @@ export default function Home() {
                                       onClick={() => incrementValue(false)}
                                       className={`${numberValue < 2
                                       ? 'cursor-not-allowed'
-                                      : 'cursor-pointer'
+                                      : 'cursor-pointer'  
                                       } w-[60px] h-[60px] flex flex-row rounded-full bg-[#10141f] items-center justify-center hover:bg-[#36272b]`
                                       }
                                   >
@@ -369,7 +383,7 @@ export default function Home() {
                                       {mintLimited} Mint per wallet allowed
                                   </div>)
                               } */}
-                              <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: {MINT_STATES[mintState].solPrice} SOL {mintState ==='OG'? ' 1X WL Token':mintState === 'WL'? ' 1X WL Token':''}</p>
+                              <p className = "text-borderYellow text-content" ><span className = "text-[#ff0000]">Requirement</span>: {MINT_STATES[mintState].solPrice} SOL {mintState ==='OG'? ' + 1X WL1 Token':mintState === 'WL'? ' + 1X WL2 Token':''}</p>
                           </div>
                       )}
                   </div>
@@ -377,7 +391,7 @@ export default function Home() {
 
             </div>
             <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/65538cbacb0d5c7a11b62978_Screenshot%202023-11-14%20150417.png' alt='no imgage' />
-            <img src='/img/KongzDAOSUBBER1280black.png' alt='no imgage' />
+            <img src='/img/KongzDAOSUBBER1280black.png' alt='no imgage' className='mb-[20vw]' />
             <div className='flex w-full gap-8'>
                 <div className='flex flex-col w-1/2'>
                     <img src='https://assets-global.website-files.com/6358359a8c87f073fb0540bb/652d2cd90269ade5118a64b2_Screenshot%202023-09-27%20195616.png' />

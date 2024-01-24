@@ -14,7 +14,7 @@ const Countdown = ({ nextTime, mintState, refresh }) => {
                 ) : (
                     <div className="w-full flex flex-col items-center">
                         <h1 className="text-xl text-white mt-8">{mintText}</h1>
-                        <div className="mt-5 text-xl font-extrabold animate-bounce text-darkYellow [&>span]:text-[#ff1109] [&>span]:text-3xl">
+                        <div className="mt-5 text-xl font-extrabold animate-bounce text-white [&>span]:text-[#ff1109] [&>span]:text-3xl">
                             <span>{days}</span> D : <span>{hours}</span> H : <span>{minutes}</span> M : <span>{seconds}</span> S
                         </div>
                     </div>
@@ -33,8 +33,6 @@ const Countdown = ({ nextTime, mintState, refresh }) => {
 
     const update = () => {
         refresh();
-
-        console.log("complete: ", nextTime);
     };
 
     return (
